@@ -1,0 +1,35 @@
+protoc -I=. --cpp_out=. sensor.proto
+
+
+
+ssh -L [laptopPort]:192.168.95.224:[ultra96Port] [user]@stu.comp.nus.edu.sg \
+e.g. \
+ssh -L 8080:192.168.95.224:8080 e0406779@stu.comp.nus.edu.sg
+
+also works
+
+On the laptop: \
+ssh -L 8080:localhost:8080 harrismaung@stu.comp.nus.edu.sg\
+On Sunfire: \
+ssh -L 8080:localhost:8080 xilinx@192.168.95.224
+
+ssh -R 1234:127.0.0.1:1234 -N -f e0406779@stu.comp.nus.edu.sg
+
+
+
+
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+print("Hello world")
+
+mydict = {
+    "beetleID": 1,
+    "packetOne": 2,
+    "packetThree": bytearray([1,2,3,4])
+}
+myvar = bytearray('Hello World','utf-8')
+myvar2 = bytearray('Hello World','utf-8')
+myval = 2
+myvalue = myval.to_bytes(2, 'little')+myvar+myvar2
+
+print(int.from_bytes(myvalue[0:2], "little"))

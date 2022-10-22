@@ -1,0 +1,38 @@
+#include <string>
+
+enum Action { 
+    SHIELD,
+    GRENADE,
+    RELOAD,
+    EXIT,
+    IDLE,
+    SHOOT,
+    NONE
+    };
+
+class Player{
+    Player(int id): id(id){};
+    void grenade();
+    void* shield_health_counter(void*);
+    void shield();
+    void reload();
+    void shoot();
+    void getDamaged(int damage);
+    void getGrenade();
+    void getShot();
+    void exit();
+    void synchronise(std::string jsonStr);
+
+    private:
+        const int id;
+        int hp = 100;
+        int bullets = 6;
+        int grenades = 2;
+        float shield_time = 0.0;
+        int shield_health = 0;
+        int num_deaths = 0;
+        int num_shield = 3;
+        int num_shield = 3;
+        Action action = NONE;
+        bool activated_shield = false;
+};
