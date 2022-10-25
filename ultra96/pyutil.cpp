@@ -1,6 +1,6 @@
 #include "sensor.pb.h"
 #include <vector>
-void payloadParser(std::unique_ptr<Sensor> &dataPtr, int (&playActionBuffer)[2]){
+void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[2]){
 }
 class Pyutil{
     public:
@@ -9,7 +9,7 @@ class Pyutil{
             std::string data;
             sensorData.SerializeToString(&data);
         };
-        std::vector<char> formatData(std::string){};
+        std::string formatData(std::string){};
         void sendToEval(){};
     private:
     int port;

@@ -80,8 +80,7 @@ void Player::getShot(){
     this->getDamaged(10);
 }
 
-void Player::synchronise(gameState &currGame){
-    gameState_playerState currPlayer  = (this->id == 1)?currGame.p1():currGame.p2();
+void Player::synchronise(const gameState_playerState currPlayer){
     this->bullets = currPlayer.bullets();
     this->hp = currPlayer.hp();
     this->grenades = currPlayer.grenades();
@@ -90,5 +89,35 @@ void Player::synchronise(gameState &currGame){
     this->num_deaths = currPlayer.num_deaths();
     this->num_shield = currPlayer.num_shield();
     this->shield_health = currPlayer.shield_health();
+}
+
+void Player::setState(gameState_playerState *currPlayer){
+    switch (this->action){
+        case SHOOT:
+            currPlayer->set_action("shoot");
+            break;
+        case GRENADE:
+            currPlayer->set_action("grenade");
+            break;
+        case RELOAD:
+            currPlayer->set_action("reload");
+            break;
+        case EXIT:
+            currPlayer->set_action("exit");
+            break;
+        case SHIELD:
+            currPlayer->set_action("shield");
+            break;
+        default:
+            currPlayer->set_action("none");
+            break;
+    }
+    currPlayer->set_bullets(this->bullets);
+    currPlayer->set_hp(this->hp);
+    currPlayer->set_num_deaths(this->num_deaths);
+    currPlayer->set_shield_health(this->shield_health);
+    currPlayer->set_shield_time(this->shield_time);
+    currPlayer->set_grenades(this->grenades);
+    currPlayer->set_num_shield(this->num_shield);
 }
 

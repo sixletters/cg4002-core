@@ -88,13 +88,6 @@ class gameState_playerState final :
     return *this;
   }
 
-  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-  }
-
   static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
     return GetDescriptor();
   }
@@ -194,11 +187,7 @@ class gameState_playerState final :
     kNumDeathsFieldNumber = 6,
     kNumShieldFieldNumber = 7,
   };
-  // required string action = 8;
-  bool has_action() const;
-  private:
-  bool _internal_has_action() const;
-  public:
+  // string action = 8;
   void clear_action();
   const std::string& action() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -212,11 +201,7 @@ class gameState_playerState final :
   std::string* _internal_mutable_action();
   public:
 
-  // required int32 hp = 1;
-  bool has_hp() const;
-  private:
-  bool _internal_has_hp() const;
-  public:
+  // int32 hp = 1;
   void clear_hp();
   int32_t hp() const;
   void set_hp(int32_t value);
@@ -225,11 +210,7 @@ class gameState_playerState final :
   void _internal_set_hp(int32_t value);
   public:
 
-  // required int32 bullets = 2;
-  bool has_bullets() const;
-  private:
-  bool _internal_has_bullets() const;
-  public:
+  // int32 bullets = 2;
   void clear_bullets();
   int32_t bullets() const;
   void set_bullets(int32_t value);
@@ -238,11 +219,7 @@ class gameState_playerState final :
   void _internal_set_bullets(int32_t value);
   public:
 
-  // required int32 grenades = 3;
-  bool has_grenades() const;
-  private:
-  bool _internal_has_grenades() const;
-  public:
+  // int32 grenades = 3;
   void clear_grenades();
   int32_t grenades() const;
   void set_grenades(int32_t value);
@@ -251,11 +228,7 @@ class gameState_playerState final :
   void _internal_set_grenades(int32_t value);
   public:
 
-  // required float shield_time = 4;
-  bool has_shield_time() const;
-  private:
-  bool _internal_has_shield_time() const;
-  public:
+  // float shield_time = 4;
   void clear_shield_time();
   float shield_time() const;
   void set_shield_time(float value);
@@ -264,11 +237,7 @@ class gameState_playerState final :
   void _internal_set_shield_time(float value);
   public:
 
-  // required int32 shield_health = 5;
-  bool has_shield_health() const;
-  private:
-  bool _internal_has_shield_health() const;
-  public:
+  // int32 shield_health = 5;
   void clear_shield_health();
   int32_t shield_health() const;
   void set_shield_health(int32_t value);
@@ -277,11 +246,7 @@ class gameState_playerState final :
   void _internal_set_shield_health(int32_t value);
   public:
 
-  // required int32 num_deaths = 6;
-  bool has_num_deaths() const;
-  private:
-  bool _internal_has_num_deaths() const;
-  public:
+  // int32 num_deaths = 6;
   void clear_num_deaths();
   int32_t num_deaths() const;
   void set_num_deaths(int32_t value);
@@ -290,11 +255,7 @@ class gameState_playerState final :
   void _internal_set_num_deaths(int32_t value);
   public:
 
-  // required int32 num_shield = 7;
-  bool has_num_shield() const;
-  private:
-  bool _internal_has_num_shield() const;
-  public:
+  // int32 num_shield = 7;
   void clear_num_shield();
   int32_t num_shield() const;
   void set_num_shield(int32_t value);
@@ -307,15 +268,10 @@ class gameState_playerState final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr action_;
     int32_t hp_;
     int32_t bullets_;
@@ -324,6 +280,7 @@ class gameState_playerState final :
     int32_t shield_health_;
     int32_t num_deaths_;
     int32_t num_shield_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_gameState_2eproto;
@@ -359,13 +316,6 @@ class gameState final :
       CopyFrom(from);
     }
     return *this;
-  }
-
-  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
@@ -463,7 +413,7 @@ class gameState final :
     kP1FieldNumber = 1,
     kP2FieldNumber = 2,
   };
-  // required .gameState.playerState p1 = 1;
+  // .gameState.playerState p1 = 1;
   bool has_p1() const;
   private:
   bool _internal_has_p1() const;
@@ -481,7 +431,7 @@ class gameState final :
       ::gameState_playerState* p1);
   ::gameState_playerState* unsafe_arena_release_p1();
 
-  // required .gameState.playerState p2 = 2;
+  // .gameState.playerState p2 = 2;
   bool has_p2() const;
   private:
   bool _internal_has_p2() const;
@@ -503,17 +453,13 @@ class gameState final :
  private:
   class _Internal;
 
-  // helper for ByteSizeLong()
-  size_t RequiredFieldsByteSizeFallback() const;
-
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::gameState_playerState* p1_;
     ::gameState_playerState* p2_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_gameState_2eproto;
@@ -529,17 +475,9 @@ class gameState final :
 #endif  // __GNUC__
 // gameState_playerState
 
-// required int32 hp = 1;
-inline bool gameState_playerState::_internal_has_hp() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_hp() const {
-  return _internal_has_hp();
-}
+// int32 hp = 1;
 inline void gameState_playerState::clear_hp() {
   _impl_.hp_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t gameState_playerState::_internal_hp() const {
   return _impl_.hp_;
@@ -549,7 +487,7 @@ inline int32_t gameState_playerState::hp() const {
   return _internal_hp();
 }
 inline void gameState_playerState::_internal_set_hp(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
+  
   _impl_.hp_ = value;
 }
 inline void gameState_playerState::set_hp(int32_t value) {
@@ -557,17 +495,9 @@ inline void gameState_playerState::set_hp(int32_t value) {
   // @@protoc_insertion_point(field_set:gameState.playerState.hp)
 }
 
-// required int32 bullets = 2;
-inline bool gameState_playerState::_internal_has_bullets() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_bullets() const {
-  return _internal_has_bullets();
-}
+// int32 bullets = 2;
 inline void gameState_playerState::clear_bullets() {
   _impl_.bullets_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline int32_t gameState_playerState::_internal_bullets() const {
   return _impl_.bullets_;
@@ -577,7 +507,7 @@ inline int32_t gameState_playerState::bullets() const {
   return _internal_bullets();
 }
 inline void gameState_playerState::_internal_set_bullets(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000004u;
+  
   _impl_.bullets_ = value;
 }
 inline void gameState_playerState::set_bullets(int32_t value) {
@@ -585,17 +515,9 @@ inline void gameState_playerState::set_bullets(int32_t value) {
   // @@protoc_insertion_point(field_set:gameState.playerState.bullets)
 }
 
-// required int32 grenades = 3;
-inline bool gameState_playerState::_internal_has_grenades() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_grenades() const {
-  return _internal_has_grenades();
-}
+// int32 grenades = 3;
 inline void gameState_playerState::clear_grenades() {
   _impl_.grenades_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline int32_t gameState_playerState::_internal_grenades() const {
   return _impl_.grenades_;
@@ -605,7 +527,7 @@ inline int32_t gameState_playerState::grenades() const {
   return _internal_grenades();
 }
 inline void gameState_playerState::_internal_set_grenades(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000008u;
+  
   _impl_.grenades_ = value;
 }
 inline void gameState_playerState::set_grenades(int32_t value) {
@@ -613,17 +535,9 @@ inline void gameState_playerState::set_grenades(int32_t value) {
   // @@protoc_insertion_point(field_set:gameState.playerState.grenades)
 }
 
-// required float shield_time = 4;
-inline bool gameState_playerState::_internal_has_shield_time() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_shield_time() const {
-  return _internal_has_shield_time();
-}
+// float shield_time = 4;
 inline void gameState_playerState::clear_shield_time() {
   _impl_.shield_time_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline float gameState_playerState::_internal_shield_time() const {
   return _impl_.shield_time_;
@@ -633,7 +547,7 @@ inline float gameState_playerState::shield_time() const {
   return _internal_shield_time();
 }
 inline void gameState_playerState::_internal_set_shield_time(float value) {
-  _impl_._has_bits_[0] |= 0x00000010u;
+  
   _impl_.shield_time_ = value;
 }
 inline void gameState_playerState::set_shield_time(float value) {
@@ -641,17 +555,9 @@ inline void gameState_playerState::set_shield_time(float value) {
   // @@protoc_insertion_point(field_set:gameState.playerState.shield_time)
 }
 
-// required int32 shield_health = 5;
-inline bool gameState_playerState::_internal_has_shield_health() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_shield_health() const {
-  return _internal_has_shield_health();
-}
+// int32 shield_health = 5;
 inline void gameState_playerState::clear_shield_health() {
   _impl_.shield_health_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000020u;
 }
 inline int32_t gameState_playerState::_internal_shield_health() const {
   return _impl_.shield_health_;
@@ -661,7 +567,7 @@ inline int32_t gameState_playerState::shield_health() const {
   return _internal_shield_health();
 }
 inline void gameState_playerState::_internal_set_shield_health(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000020u;
+  
   _impl_.shield_health_ = value;
 }
 inline void gameState_playerState::set_shield_health(int32_t value) {
@@ -669,17 +575,9 @@ inline void gameState_playerState::set_shield_health(int32_t value) {
   // @@protoc_insertion_point(field_set:gameState.playerState.shield_health)
 }
 
-// required int32 num_deaths = 6;
-inline bool gameState_playerState::_internal_has_num_deaths() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_num_deaths() const {
-  return _internal_has_num_deaths();
-}
+// int32 num_deaths = 6;
 inline void gameState_playerState::clear_num_deaths() {
   _impl_.num_deaths_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000040u;
 }
 inline int32_t gameState_playerState::_internal_num_deaths() const {
   return _impl_.num_deaths_;
@@ -689,7 +587,7 @@ inline int32_t gameState_playerState::num_deaths() const {
   return _internal_num_deaths();
 }
 inline void gameState_playerState::_internal_set_num_deaths(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000040u;
+  
   _impl_.num_deaths_ = value;
 }
 inline void gameState_playerState::set_num_deaths(int32_t value) {
@@ -697,17 +595,9 @@ inline void gameState_playerState::set_num_deaths(int32_t value) {
   // @@protoc_insertion_point(field_set:gameState.playerState.num_deaths)
 }
 
-// required int32 num_shield = 7;
-inline bool gameState_playerState::_internal_has_num_shield() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_num_shield() const {
-  return _internal_has_num_shield();
-}
+// int32 num_shield = 7;
 inline void gameState_playerState::clear_num_shield() {
   _impl_.num_shield_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000080u;
 }
 inline int32_t gameState_playerState::_internal_num_shield() const {
   return _impl_.num_shield_;
@@ -717,7 +607,7 @@ inline int32_t gameState_playerState::num_shield() const {
   return _internal_num_shield();
 }
 inline void gameState_playerState::_internal_set_num_shield(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000080u;
+  
   _impl_.num_shield_ = value;
 }
 inline void gameState_playerState::set_num_shield(int32_t value) {
@@ -725,17 +615,9 @@ inline void gameState_playerState::set_num_shield(int32_t value) {
   // @@protoc_insertion_point(field_set:gameState.playerState.num_shield)
 }
 
-// required string action = 8;
-inline bool gameState_playerState::_internal_has_action() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool gameState_playerState::has_action() const {
-  return _internal_has_action();
-}
+// string action = 8;
 inline void gameState_playerState::clear_action() {
   _impl_.action_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& gameState_playerState::action() const {
   // @@protoc_insertion_point(field_get:gameState.playerState.action)
@@ -744,7 +626,7 @@ inline const std::string& gameState_playerState::action() const {
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
 void gameState_playerState::set_action(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000001u;
+ 
  _impl_.action_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:gameState.playerState.action)
 }
@@ -757,32 +639,22 @@ inline const std::string& gameState_playerState::_internal_action() const {
   return _impl_.action_.Get();
 }
 inline void gameState_playerState::_internal_set_action(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000001u;
+  
   _impl_.action_.Set(value, GetArenaForAllocation());
 }
 inline std::string* gameState_playerState::_internal_mutable_action() {
-  _impl_._has_bits_[0] |= 0x00000001u;
+  
   return _impl_.action_.Mutable(GetArenaForAllocation());
 }
 inline std::string* gameState_playerState::release_action() {
   // @@protoc_insertion_point(field_release:gameState.playerState.action)
-  if (!_internal_has_action()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* p = _impl_.action_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.action_.IsDefault()) {
-    _impl_.action_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
+  return _impl_.action_.Release();
 }
 inline void gameState_playerState::set_allocated_action(std::string* action) {
   if (action != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
+    
   }
   _impl_.action_.SetAllocated(action, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -797,18 +669,18 @@ inline void gameState_playerState::set_allocated_action(std::string* action) {
 
 // gameState
 
-// required .gameState.playerState p1 = 1;
+// .gameState.playerState p1 = 1;
 inline bool gameState::_internal_has_p1() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.p1_ != nullptr);
-  return value;
+  return this != internal_default_instance() && _impl_.p1_ != nullptr;
 }
 inline bool gameState::has_p1() const {
   return _internal_has_p1();
 }
 inline void gameState::clear_p1() {
-  if (_impl_.p1_ != nullptr) _impl_.p1_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  if (GetArenaForAllocation() == nullptr && _impl_.p1_ != nullptr) {
+    delete _impl_.p1_;
+  }
+  _impl_.p1_ = nullptr;
 }
 inline const ::gameState_playerState& gameState::_internal_p1() const {
   const ::gameState_playerState* p = _impl_.p1_;
@@ -826,14 +698,14 @@ inline void gameState::unsafe_arena_set_allocated_p1(
   }
   _impl_.p1_ = p1;
   if (p1) {
-    _impl_._has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
+    
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameState.p1)
 }
 inline ::gameState_playerState* gameState::release_p1() {
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  
   ::gameState_playerState* temp = _impl_.p1_;
   _impl_.p1_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -849,13 +721,13 @@ inline ::gameState_playerState* gameState::release_p1() {
 }
 inline ::gameState_playerState* gameState::unsafe_arena_release_p1() {
   // @@protoc_insertion_point(field_release:gameState.p1)
-  _impl_._has_bits_[0] &= ~0x00000001u;
+  
   ::gameState_playerState* temp = _impl_.p1_;
   _impl_.p1_ = nullptr;
   return temp;
 }
 inline ::gameState_playerState* gameState::_internal_mutable_p1() {
-  _impl_._has_bits_[0] |= 0x00000001u;
+  
   if (_impl_.p1_ == nullptr) {
     auto* p = CreateMaybeMessage<::gameState_playerState>(GetArenaForAllocation());
     _impl_.p1_ = p;
@@ -879,26 +751,26 @@ inline void gameState::set_allocated_p1(::gameState_playerState* p1) {
       p1 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, p1, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000001u;
+    
   } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
+    
   }
   _impl_.p1_ = p1;
   // @@protoc_insertion_point(field_set_allocated:gameState.p1)
 }
 
-// required .gameState.playerState p2 = 2;
+// .gameState.playerState p2 = 2;
 inline bool gameState::_internal_has_p2() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  PROTOBUF_ASSUME(!value || _impl_.p2_ != nullptr);
-  return value;
+  return this != internal_default_instance() && _impl_.p2_ != nullptr;
 }
 inline bool gameState::has_p2() const {
   return _internal_has_p2();
 }
 inline void gameState::clear_p2() {
-  if (_impl_.p2_ != nullptr) _impl_.p2_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  if (GetArenaForAllocation() == nullptr && _impl_.p2_ != nullptr) {
+    delete _impl_.p2_;
+  }
+  _impl_.p2_ = nullptr;
 }
 inline const ::gameState_playerState& gameState::_internal_p2() const {
   const ::gameState_playerState* p = _impl_.p2_;
@@ -916,14 +788,14 @@ inline void gameState::unsafe_arena_set_allocated_p2(
   }
   _impl_.p2_ = p2;
   if (p2) {
-    _impl_._has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
+    
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:gameState.p2)
 }
 inline ::gameState_playerState* gameState::release_p2() {
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  
   ::gameState_playerState* temp = _impl_.p2_;
   _impl_.p2_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
@@ -939,13 +811,13 @@ inline ::gameState_playerState* gameState::release_p2() {
 }
 inline ::gameState_playerState* gameState::unsafe_arena_release_p2() {
   // @@protoc_insertion_point(field_release:gameState.p2)
-  _impl_._has_bits_[0] &= ~0x00000002u;
+  
   ::gameState_playerState* temp = _impl_.p2_;
   _impl_.p2_ = nullptr;
   return temp;
 }
 inline ::gameState_playerState* gameState::_internal_mutable_p2() {
-  _impl_._has_bits_[0] |= 0x00000002u;
+  
   if (_impl_.p2_ == nullptr) {
     auto* p = CreateMaybeMessage<::gameState_playerState>(GetArenaForAllocation());
     _impl_.p2_ = p;
@@ -969,9 +841,9 @@ inline void gameState::set_allocated_p2(::gameState_playerState* p2) {
       p2 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, p2, submessage_arena);
     }
-    _impl_._has_bits_[0] |= 0x00000002u;
+    
   } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
+    
   }
   _impl_.p2_ = p2;
   // @@protoc_insertion_point(field_set_allocated:gameState.p2)

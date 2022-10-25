@@ -22,17 +22,19 @@ std::unordered_map<std::string, int> actionStringMap = {
 };
 
 class Player{
-    Player(int id): id(id){};
-    void grenade();
-    void* shield_health_counter(void*);
-    void shield();
-    void reload();
-    void shoot();
-    void getDamaged(int damage);
-    void getGrenade();
-    void getShot();
-    void exit();
-    void synchronise(gameState &currGame);
+    public:
+        Player(int id): id(id){};
+        void grenade();
+        void* shield_health_counter(void*);
+        void shield();
+        void reload();
+        void shoot();
+        void getDamaged(int damage);
+        void getGrenade();
+        void getShot();
+        void exit();
+        void setState(gameState_playerState *);
+        void synchronise(const gameState_playerState currPlayer);
 
     private:
         const int id;

@@ -22,16 +22,15 @@ namespace _pbi = _pb::internal;
 
 PROTOBUF_CONSTEXPR gameState_playerState::gameState_playerState(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_._has_bits_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}
-  , /*decltype(_impl_.action_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_.action_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.hp_)*/0
   , /*decltype(_impl_.bullets_)*/0
   , /*decltype(_impl_.grenades_)*/0
   , /*decltype(_impl_.shield_time_)*/0
   , /*decltype(_impl_.shield_health_)*/0
   , /*decltype(_impl_.num_deaths_)*/0
-  , /*decltype(_impl_.num_shield_)*/0} {}
+  , /*decltype(_impl_.num_shield_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct gameState_playerStateDefaultTypeInternal {
   PROTOBUF_CONSTEXPR gameState_playerStateDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -43,10 +42,9 @@ struct gameState_playerStateDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 gameState_playerStateDefaultTypeInternal _gameState_playerState_default_instance_;
 PROTOBUF_CONSTEXPR gameState::gameState(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_._has_bits_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}
-  , /*decltype(_impl_.p1_)*/nullptr
-  , /*decltype(_impl_.p2_)*/nullptr} {}
+    /*decltype(_impl_.p1_)*/nullptr
+  , /*decltype(_impl_.p2_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct gameStateDefaultTypeInternal {
   PROTOBUF_CONSTEXPR gameStateDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -61,7 +59,7 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_gameS
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_gameState_2eproto = nullptr;
 
 const uint32_t TableStruct_gameState_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  PROTOBUF_FIELD_OFFSET(::gameState_playerState, _impl_._has_bits_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gameState_playerState, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -75,15 +73,7 @@ const uint32_t TableStruct_gameState_2eproto::offsets[] PROTOBUF_SECTION_VARIABL
   PROTOBUF_FIELD_OFFSET(::gameState_playerState, _impl_.num_deaths_),
   PROTOBUF_FIELD_OFFSET(::gameState_playerState, _impl_.num_shield_),
   PROTOBUF_FIELD_OFFSET(::gameState_playerState, _impl_.action_),
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  0,
-  PROTOBUF_FIELD_OFFSET(::gameState, _impl_._has_bits_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::gameState, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -91,12 +81,10 @@ const uint32_t TableStruct_gameState_2eproto::offsets[] PROTOBUF_SECTION_VARIABL
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::gameState, _impl_.p1_),
   PROTOBUF_FIELD_OFFSET(::gameState, _impl_.p2_),
-  0,
-  1,
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 14, -1, sizeof(::gameState_playerState)},
-  { 22, 30, -1, sizeof(::gameState)},
+  { 0, -1, -1, sizeof(::gameState_playerState)},
+  { 14, -1, -1, sizeof(::gameState)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -106,16 +94,16 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_gameState_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\017gameState.proto\"\366\001\n\tgameState\022\"\n\002p1\030\001 "
-  "\002(\0132\026.gameState.playerState\022\"\n\002p2\030\002 \002(\0132"
+  "\001(\0132\026.gameState.playerState\022\"\n\002p2\030\002 \001(\0132"
   "\026.gameState.playerState\032\240\001\n\013playerState\022"
-  "\n\n\002hp\030\001 \002(\005\022\017\n\007bullets\030\002 \002(\005\022\020\n\010grenades"
-  "\030\003 \002(\005\022\023\n\013shield_time\030\004 \002(\002\022\025\n\rshield_he"
-  "alth\030\005 \002(\005\022\022\n\nnum_deaths\030\006 \002(\005\022\022\n\nnum_sh"
-  "ield\030\007 \002(\005\022\016\n\006action\030\010 \002(\t"
+  "\n\n\002hp\030\001 \001(\005\022\017\n\007bullets\030\002 \001(\005\022\020\n\010grenades"
+  "\030\003 \001(\005\022\023\n\013shield_time\030\004 \001(\002\022\025\n\rshield_he"
+  "alth\030\005 \001(\005\022\022\n\nnum_deaths\030\006 \001(\005\022\022\n\nnum_sh"
+  "ield\030\007 \001(\005\022\016\n\006action\030\010 \001(\tb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_gameState_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_gameState_2eproto = {
-    false, false, 266, descriptor_table_protodef_gameState_2eproto,
+    false, false, 274, descriptor_table_protodef_gameState_2eproto,
     "gameState.proto",
     &descriptor_table_gameState_2eproto_once, nullptr, 0, 2,
     schemas, file_default_instances, TableStruct_gameState_2eproto::offsets,
@@ -133,34 +121,6 @@ PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_in
 
 class gameState_playerState::_Internal {
  public:
-  using HasBits = decltype(std::declval<gameState_playerState>()._impl_._has_bits_);
-  static void set_has_hp(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-  static void set_has_bullets(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static void set_has_grenades(HasBits* has_bits) {
-    (*has_bits)[0] |= 8u;
-  }
-  static void set_has_shield_time(HasBits* has_bits) {
-    (*has_bits)[0] |= 16u;
-  }
-  static void set_has_shield_health(HasBits* has_bits) {
-    (*has_bits)[0] |= 32u;
-  }
-  static void set_has_num_deaths(HasBits* has_bits) {
-    (*has_bits)[0] |= 64u;
-  }
-  static void set_has_num_shield(HasBits* has_bits) {
-    (*has_bits)[0] |= 128u;
-  }
-  static void set_has_action(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static bool MissingRequiredFields(const HasBits& has_bits) {
-    return ((has_bits[0] & 0x000000ff) ^ 0x000000ff) != 0;
-  }
 };
 
 gameState_playerState::gameState_playerState(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -173,23 +133,22 @@ gameState_playerState::gameState_playerState(const gameState_playerState& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   gameState_playerState* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){from._impl_._has_bits_}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.action_){}
+      decltype(_impl_.action_){}
     , decltype(_impl_.hp_){}
     , decltype(_impl_.bullets_){}
     , decltype(_impl_.grenades_){}
     , decltype(_impl_.shield_time_){}
     , decltype(_impl_.shield_health_){}
     , decltype(_impl_.num_deaths_){}
-    , decltype(_impl_.num_shield_){}};
+    , decltype(_impl_.num_shield_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.action_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.action_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_action()) {
+  if (!from._internal_action().empty()) {
     _this->_impl_.action_.Set(from._internal_action(), 
       _this->GetArenaForAllocation());
   }
@@ -204,9 +163,7 @@ inline void gameState_playerState::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.action_){}
+      decltype(_impl_.action_){}
     , decltype(_impl_.hp_){0}
     , decltype(_impl_.bullets_){0}
     , decltype(_impl_.grenades_){0}
@@ -214,6 +171,7 @@ inline void gameState_playerState::SharedCtor(
     , decltype(_impl_.shield_health_){0}
     , decltype(_impl_.num_deaths_){0}
     , decltype(_impl_.num_shield_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.action_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
@@ -245,98 +203,82 @@ void gameState_playerState::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    _impl_.action_.ClearNonDefaultToEmpty();
-  }
-  if (cached_has_bits & 0x000000feu) {
-    ::memset(&_impl_.hp_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&_impl_.num_shield_) -
-        reinterpret_cast<char*>(&_impl_.hp_)) + sizeof(_impl_.num_shield_));
-  }
-  _impl_._has_bits_.Clear();
+  _impl_.action_.ClearToEmpty();
+  ::memset(&_impl_.hp_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.num_shield_) -
+      reinterpret_cast<char*>(&_impl_.hp_)) + sizeof(_impl_.num_shield_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* gameState_playerState::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // required int32 hp = 1;
+      // int32 hp = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _Internal::set_has_hp(&has_bits);
           _impl_.hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required int32 bullets = 2;
+      // int32 bullets = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _Internal::set_has_bullets(&has_bits);
           _impl_.bullets_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required int32 grenades = 3;
+      // int32 grenades = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _Internal::set_has_grenades(&has_bits);
           _impl_.grenades_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required float shield_time = 4;
+      // float shield_time = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
-          _Internal::set_has_shield_time(&has_bits);
           _impl_.shield_time_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // required int32 shield_health = 5;
+      // int32 shield_health = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _Internal::set_has_shield_health(&has_bits);
           _impl_.shield_health_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required int32 num_deaths = 6;
+      // int32 num_deaths = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
-          _Internal::set_has_num_deaths(&has_bits);
           _impl_.num_deaths_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required int32 num_shield = 7;
+      // int32 num_shield = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
-          _Internal::set_has_num_shield(&has_bits);
           _impl_.num_shield_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // required string action = 8;
+      // string action = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
           auto str = _internal_mutable_action();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "gameState.playerState.action");
-          #endif  // !NDEBUG
+          CHK_(::_pbi::VerifyUTF8(str, "gameState.playerState.action"));
         } else
           goto handle_unusual;
         continue;
@@ -356,7 +298,6 @@ const char* gameState_playerState::_InternalParse(const char* ptr, ::_pbi::Parse
     CHK_(ptr != nullptr);
   }  // while
 message_done:
-  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -370,54 +311,57 @@ uint8_t* gameState_playerState::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _impl_._has_bits_[0];
-  // required int32 hp = 1;
-  if (cached_has_bits & 0x00000002u) {
+  // int32 hp = 1;
+  if (this->_internal_hp() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_hp(), target);
   }
 
-  // required int32 bullets = 2;
-  if (cached_has_bits & 0x00000004u) {
+  // int32 bullets = 2;
+  if (this->_internal_bullets() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_bullets(), target);
   }
 
-  // required int32 grenades = 3;
-  if (cached_has_bits & 0x00000008u) {
+  // int32 grenades = 3;
+  if (this->_internal_grenades() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(3, this->_internal_grenades(), target);
   }
 
-  // required float shield_time = 4;
-  if (cached_has_bits & 0x00000010u) {
+  // float shield_time = 4;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_shield_time = this->_internal_shield_time();
+  uint32_t raw_shield_time;
+  memcpy(&raw_shield_time, &tmp_shield_time, sizeof(tmp_shield_time));
+  if (raw_shield_time != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_shield_time(), target);
   }
 
-  // required int32 shield_health = 5;
-  if (cached_has_bits & 0x00000020u) {
+  // int32 shield_health = 5;
+  if (this->_internal_shield_health() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(5, this->_internal_shield_health(), target);
   }
 
-  // required int32 num_deaths = 6;
-  if (cached_has_bits & 0x00000040u) {
+  // int32 num_deaths = 6;
+  if (this->_internal_num_deaths() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(6, this->_internal_num_deaths(), target);
   }
 
-  // required int32 num_shield = 7;
-  if (cached_has_bits & 0x00000080u) {
+  // int32 num_shield = 7;
+  if (this->_internal_num_shield() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(7, this->_internal_num_shield(), target);
   }
 
-  // required string action = 8;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+  // string action = 8;
+  if (!this->_internal_action().empty()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_action().data(), static_cast<int>(this->_internal_action().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "gameState.playerState.action");
     target = stream->WriteStringMaybeAliased(
         8, this->_internal_action(), target);
@@ -431,91 +375,59 @@ uint8_t* gameState_playerState::_InternalSerialize(
   return target;
 }
 
-size_t gameState_playerState::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:gameState.playerState)
-  size_t total_size = 0;
-
-  if (_internal_has_action()) {
-    // required string action = 8;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_action());
-  }
-
-  if (_internal_has_hp()) {
-    // required int32 hp = 1;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_hp());
-  }
-
-  if (_internal_has_bullets()) {
-    // required int32 bullets = 2;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_bullets());
-  }
-
-  if (_internal_has_grenades()) {
-    // required int32 grenades = 3;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_grenades());
-  }
-
-  if (_internal_has_shield_time()) {
-    // required float shield_time = 4;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_shield_health()) {
-    // required int32 shield_health = 5;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_shield_health());
-  }
-
-  if (_internal_has_num_deaths()) {
-    // required int32 num_deaths = 6;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_deaths());
-  }
-
-  if (_internal_has_num_shield()) {
-    // required int32 num_shield = 7;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_shield());
-  }
-
-  return total_size;
-}
 size_t gameState_playerState::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:gameState.playerState)
   size_t total_size = 0;
 
-  if (((_impl_._has_bits_[0] & 0x000000ff) ^ 0x000000ff) == 0) {  // All required fields are present.
-    // required string action = 8;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_action());
-
-    // required int32 hp = 1;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_hp());
-
-    // required int32 bullets = 2;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_bullets());
-
-    // required int32 grenades = 3;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_grenades());
-
-    // required float shield_time = 4;
-    total_size += 1 + 4;
-
-    // required int32 shield_health = 5;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_shield_health());
-
-    // required int32 num_deaths = 6;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_deaths());
-
-    // required int32 num_shield = 7;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_shield());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // string action = 8;
+  if (!this->_internal_action().empty()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_action());
+  }
+
+  // int32 hp = 1;
+  if (this->_internal_hp() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_hp());
+  }
+
+  // int32 bullets = 2;
+  if (this->_internal_bullets() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_bullets());
+  }
+
+  // int32 grenades = 3;
+  if (this->_internal_grenades() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_grenades());
+  }
+
+  // float shield_time = 4;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_shield_time = this->_internal_shield_time();
+  uint32_t raw_shield_time;
+  memcpy(&raw_shield_time, &tmp_shield_time, sizeof(tmp_shield_time));
+  if (raw_shield_time != 0) {
+    total_size += 1 + 4;
+  }
+
+  // int32 shield_health = 5;
+  if (this->_internal_shield_health() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_shield_health());
+  }
+
+  // int32 num_deaths = 6;
+  if (this->_internal_num_deaths() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_deaths());
+  }
+
+  // int32 num_shield = 7;
+  if (this->_internal_num_shield() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_num_shield());
+  }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
@@ -535,33 +447,33 @@ void gameState_playerState::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, 
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    if (cached_has_bits & 0x00000001u) {
-      _this->_internal_set_action(from._internal_action());
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_impl_.hp_ = from._impl_.hp_;
-    }
-    if (cached_has_bits & 0x00000004u) {
-      _this->_impl_.bullets_ = from._impl_.bullets_;
-    }
-    if (cached_has_bits & 0x00000008u) {
-      _this->_impl_.grenades_ = from._impl_.grenades_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      _this->_impl_.shield_time_ = from._impl_.shield_time_;
-    }
-    if (cached_has_bits & 0x00000020u) {
-      _this->_impl_.shield_health_ = from._impl_.shield_health_;
-    }
-    if (cached_has_bits & 0x00000040u) {
-      _this->_impl_.num_deaths_ = from._impl_.num_deaths_;
-    }
-    if (cached_has_bits & 0x00000080u) {
-      _this->_impl_.num_shield_ = from._impl_.num_shield_;
-    }
-    _this->_impl_._has_bits_[0] |= cached_has_bits;
+  if (!from._internal_action().empty()) {
+    _this->_internal_set_action(from._internal_action());
+  }
+  if (from._internal_hp() != 0) {
+    _this->_internal_set_hp(from._internal_hp());
+  }
+  if (from._internal_bullets() != 0) {
+    _this->_internal_set_bullets(from._internal_bullets());
+  }
+  if (from._internal_grenades() != 0) {
+    _this->_internal_set_grenades(from._internal_grenades());
+  }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_shield_time = from._internal_shield_time();
+  uint32_t raw_shield_time;
+  memcpy(&raw_shield_time, &tmp_shield_time, sizeof(tmp_shield_time));
+  if (raw_shield_time != 0) {
+    _this->_internal_set_shield_time(from._internal_shield_time());
+  }
+  if (from._internal_shield_health() != 0) {
+    _this->_internal_set_shield_health(from._internal_shield_health());
+  }
+  if (from._internal_num_deaths() != 0) {
+    _this->_internal_set_num_deaths(from._internal_num_deaths());
+  }
+  if (from._internal_num_shield() != 0) {
+    _this->_internal_set_num_shield(from._internal_num_shield());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -574,7 +486,6 @@ void gameState_playerState::CopyFrom(const gameState_playerState& from) {
 }
 
 bool gameState_playerState::IsInitialized() const {
-  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) return false;
   return true;
 }
 
@@ -583,7 +494,6 @@ void gameState_playerState::InternalSwap(gameState_playerState* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.action_, lhs_arena,
       &other->_impl_.action_, rhs_arena
@@ -606,18 +516,8 @@ void gameState_playerState::InternalSwap(gameState_playerState* other) {
 
 class gameState::_Internal {
  public:
-  using HasBits = decltype(std::declval<gameState>()._impl_._has_bits_);
   static const ::gameState_playerState& p1(const gameState* msg);
-  static void set_has_p1(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
   static const ::gameState_playerState& p2(const gameState* msg);
-  static void set_has_p2(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-  static bool MissingRequiredFields(const HasBits& has_bits) {
-    return ((has_bits[0] & 0x00000003) ^ 0x00000003) != 0;
-  }
 };
 
 const ::gameState_playerState&
@@ -638,10 +538,9 @@ gameState::gameState(const gameState& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   gameState* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){from._impl_._has_bits_}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.p1_){nullptr}
-    , decltype(_impl_.p2_){nullptr}};
+      decltype(_impl_.p1_){nullptr}
+    , decltype(_impl_.p2_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_p1()) {
@@ -658,10 +557,9 @@ inline void gameState::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.p1_){nullptr}
+      decltype(_impl_.p1_){nullptr}
     , decltype(_impl_.p2_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
   };
 }
 
@@ -690,29 +588,24 @@ void gameState::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(_impl_.p1_ != nullptr);
-      _impl_.p1_->Clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(_impl_.p2_ != nullptr);
-      _impl_.p2_->Clear();
-    }
+  if (GetArenaForAllocation() == nullptr && _impl_.p1_ != nullptr) {
+    delete _impl_.p1_;
   }
-  _impl_._has_bits_.Clear();
+  _impl_.p1_ = nullptr;
+  if (GetArenaForAllocation() == nullptr && _impl_.p2_ != nullptr) {
+    delete _impl_.p2_;
+  }
+  _impl_.p2_ = nullptr;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* gameState::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // required .gameState.playerState p1 = 1;
+      // .gameState.playerState p1 = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_p1(), ptr);
@@ -720,7 +613,7 @@ const char* gameState::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
         } else
           goto handle_unusual;
         continue;
-      // required .gameState.playerState p2 = 2;
+      // .gameState.playerState p2 = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_p2(), ptr);
@@ -744,7 +637,6 @@ const char* gameState::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     CHK_(ptr != nullptr);
   }  // while
 message_done:
-  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -758,16 +650,15 @@ uint8_t* gameState::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = _impl_._has_bits_[0];
-  // required .gameState.playerState p1 = 1;
-  if (cached_has_bits & 0x00000001u) {
+  // .gameState.playerState p1 = 1;
+  if (this->_internal_has_p1()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(1, _Internal::p1(this),
         _Internal::p1(this).GetCachedSize(), target, stream);
   }
 
-  // required .gameState.playerState p2 = 2;
-  if (cached_has_bits & 0x00000002u) {
+  // .gameState.playerState p2 = 2;
+  if (this->_internal_has_p2()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(2, _Internal::p2(this),
         _Internal::p2(this).GetCachedSize(), target, stream);
@@ -781,47 +672,27 @@ uint8_t* gameState::_InternalSerialize(
   return target;
 }
 
-size_t gameState::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:gameState)
-  size_t total_size = 0;
-
-  if (_internal_has_p1()) {
-    // required .gameState.playerState p1 = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.p1_);
-  }
-
-  if (_internal_has_p2()) {
-    // required .gameState.playerState p2 = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.p2_);
-  }
-
-  return total_size;
-}
 size_t gameState::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:gameState)
   size_t total_size = 0;
 
-  if (((_impl_._has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required .gameState.playerState p1 = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.p1_);
-
-    // required .gameState.playerState p2 = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.p2_);
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
+
+  // .gameState.playerState p1 = 1;
+  if (this->_internal_has_p1()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.p1_);
+  }
+
+  // .gameState.playerState p2 = 2;
+  if (this->_internal_has_p2()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.p2_);
+  }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
@@ -841,16 +712,13 @@ void gameState::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
-    if (cached_has_bits & 0x00000001u) {
-      _this->_internal_mutable_p1()->::gameState_playerState::MergeFrom(
-          from._internal_p1());
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_internal_mutable_p2()->::gameState_playerState::MergeFrom(
-          from._internal_p2());
-    }
+  if (from._internal_has_p1()) {
+    _this->_internal_mutable_p1()->::gameState_playerState::MergeFrom(
+        from._internal_p1());
+  }
+  if (from._internal_has_p2()) {
+    _this->_internal_mutable_p2()->::gameState_playerState::MergeFrom(
+        from._internal_p2());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -863,20 +731,12 @@ void gameState::CopyFrom(const gameState& from) {
 }
 
 bool gameState::IsInitialized() const {
-  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) return false;
-  if (_internal_has_p1()) {
-    if (!_impl_.p1_->IsInitialized()) return false;
-  }
-  if (_internal_has_p2()) {
-    if (!_impl_.p2_->IsInitialized()) return false;
-  }
   return true;
 }
 
 void gameState::InternalSwap(gameState* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(gameState, _impl_.p2_)
       + sizeof(gameState::_impl_.p2_)

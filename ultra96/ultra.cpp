@@ -9,6 +9,7 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <arpa/inet.h> // inet_addr()
 #include <sys/types.h>
 #include <memory>
 #include "game.hpp"
@@ -159,13 +160,29 @@ void * receiverThread(void *arg){
 void * senderThread(void * arg){
     struct threadParams * param = (struct threadParams *) arg;
     bool playerFlags[2] = {false, false};
-    int playerActionBuffer[2] = {6,6};
+    Action playerActionBuffer[2] = {NONE,NONE};
     std::vector<int> threadPool;
     bool playerShotMap[2] = {false,false};
     Game currGame(param->numberOfplayers);
-
-    // CREATE AND CONNECT SOCKET HERE
     Pyutil api(1234);
+    int sockfd;
+    struct sockaddr_in servaddr;
+ 
+    // socket create and verification
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if (sockfd == -1) {
+        printf("socket creation failed...\n");
+        exit(0);
+    }
+    else
+        printf("Socket successfully created..\n");
+    bzero(&servaddr, sizeof(servaddr));
+ 
+    // assign IP, PORT
+    servaddr.sin_family = AF_INET;
+    servaddr.sin_addr.s_addr = inet_addr(param->address);
+    servaddr.sin_port = htons(param->port);
+    
     while(true){
         if(param->DATA_BUFFER->size() > 0){
             pthread_mutex_lock(param->lock);
@@ -182,22 +199,42 @@ void * senderThread(void * arg){
                     playerShotMap[currPlayer-1] = true;
                     continue;
                 }
+                // PARSE AND FIND ACTION AND PUT IT IN PLAYERACTION BUFFER
                 payloadParser(dataPtr, playerActionBuffer);
+
+                // GAME TAKES ACTION
                 currGame.takeAction(playerShotMap, playerActionBuffer);
+            
+                //SERIALIZE GAME TO JSON
                 std::string JsonString;
-                google::protobuf::util::MessageToJsonString(*dataPtr, &JsonString);
-                std::cout<<JsonString<<"\n";
-                // std::vector<char> encodedData = api.formatData(JsonString);
-                // for(int i=0;i<2;i++){
-                //     playerShotMap[i] =false;
-                // }
+                currGame.serializeToJson(JsonString);
+
+                //FORMAT USING PYTHON UTILITY SERVER
+                std::string encodedData = api.formatData(JsonString);
+
+                write(sockfd, encodedData.data(), encodedData.size());
+                int i = 0;
+                char buff[4];
+                read(sockfd,&(buff[i]), 1);
+                while(buff[i] != '_'){
+                    read(sockfd, &(buff[i]), 1);
+                    i++;
+                }
+                buff[i] = '\0';
+                int sizeOfData = atoi(buff);
+                std::string expectedGameState(sizeOfData,' ');
+                read(sockfd,expectedGameState.data(),sizeOfData);
+                if(playerActionBuffer[0] == EXIT){
+                    close(sockfd);
+                }
+                for(int i=0;i<2;i++){
+                    playerShotMap[i] =false;
+                }
             }
 
         }
-        pthread_mutex_lock(param->lock);
-        // std::cout<<param->DATA_BUFFER->size()<<"\n";
-        pthread_mutex_unlock(param->lock);
     }
+    close(sockfd);
 
 } 
 

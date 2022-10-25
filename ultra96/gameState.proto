@@ -1,15 +1,15 @@
-syntax = "proto2";
+syntax = "proto3";
 message gameState{
     message playerState {
-            required int32 hp = 1;
-            required int32 bullets = 2;
-            required int32 grenades = 3;
-            required float shield_time = 4;
-            required int32 shield_health = 5;
-            required int32 num_deaths = 6;
-            required int32 num_shield = 7;
-            required string action = 8;
+            int32 hp = 1;
+            int32 bullets = 2;
+            int32 grenades = 3;
+            float shield_time = 4;
+            int32 shield_health = 5;
+            int32 num_deaths = 6;
+            int32 num_shield = 7;
+            string action = 8;
         }
-    required playerState p1 = 1;
-    required playerState p2 = 2;
+    playerState p1 = 1;
+    playerState p2 = 2;
 };
