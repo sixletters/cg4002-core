@@ -1,9 +1,18 @@
-#include "json.hpp"
+
 #include "player.hpp"
-using json = nlohmann::json;
+#include "gameState.pb.h"
+
 
 class Game {
-    Game(int n): numOfPlayers(n){};
+    public:
+        Game(int n): numOfPlayers(n){};
+        bool isSinglePlayer(){
+            return numOfPlayers==1;
+        }
+        void takeAction(bool (&playerShotMao)[2], int (&playerActionBuffer)[2]){
+
+        };
+        gameState getGameState();
     private:
         Player *player1;
         Player *player2;

@@ -1,4 +1,5 @@
 #include <string>
+#include "gameState.pb.h"
 
 enum Action { 
     SHIELD,
@@ -9,6 +10,16 @@ enum Action {
     SHOOT,
     NONE
     };
+
+std::unordered_map<std::string, int> actionStringMap = {
+    {"shield", 0},
+    {"grenade", 1},
+    {"reload", 2},
+    {"exit", 3},
+    {"idle", 4},
+    {"shoot", 5},
+    {"none", 6}
+};
 
 class Player{
     Player(int id): id(id){};
@@ -21,7 +32,7 @@ class Player{
     void getGrenade();
     void getShot();
     void exit();
-    void synchronise(std::string jsonStr);
+    void synchronise(gameState &currGame);
 
     private:
         const int id;
@@ -31,7 +42,6 @@ class Player{
         float shield_time = 0.0;
         int shield_health = 0;
         int num_deaths = 0;
-        int num_shield = 3;
         int num_shield = 3;
         Action action = NONE;
         bool activated_shield = false;
