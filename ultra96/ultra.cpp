@@ -17,7 +17,7 @@
 #include <queue>
 #include <google/protobuf/util/json_util.h>
 #include "pyutil.cpp"
-
+#define SA struct sockaddr
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
@@ -26,7 +26,7 @@
 
 void *receiverThread(void * arg);
 void *senderThread(void * arg);
-
+void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[2]);
 
 // Params to be shared by thread
 struct threadParams{
@@ -36,7 +36,6 @@ struct threadParams{
     int port;
     char* address;
 };
-
 
 // Main loop
 int main(int argc, char** argv){
@@ -142,9 +141,9 @@ void * receiverThread(void *arg){
         sensorPtr->ParseFromArray((void*)buf.data(), buf.size()-1);
 
         //testing
-        std::cout<<sensorPtr->beetleid()<<"\n";
-        std::cout<<sensorPtr->playerid()<<"\n";
-        std::cout<<sensorPtr->payload().size()<<"\n";
+        // std::cout<<sensorPtr->beetleid()<<"\n";
+        // std::cout<<sensorPtr->playerid()<<"\n";
+        // std::cout<<sensorPtr->payload().size()<<"\n";
 
         // acquire lock and push into databuffer
         pthread_mutex_lock(param->lock);
@@ -160,7 +159,7 @@ void * receiverThread(void *arg){
 void * senderThread(void * arg){
     struct threadParams * param = (struct threadParams *) arg;
     bool playerFlags[2] = {false, false};
-    Action playerActionBuffer[2] = {NONE,NONE};
+    Action playerActionBuffer[2] = {(Action) NONE, (Action) NONE};
     std::vector<int> threadPool;
     bool playerShotMap[2] = {false,false};
     Game currGame(param->numberOfplayers);
@@ -180,10 +179,23 @@ void * senderThread(void * arg){
  
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr(param->address);
-    servaddr.sin_port = htons(param->port);
-    
+    inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr.s_addr);
+    // servaddr.sin_addr.s_addr = inet_addr(IN6ADDR_ANY_INIT);
+    // servaddr.sin_port = htons(param->port);
+    servaddr.sin_port = htons(8090);
+    std::cout<<param->port<<"\n";
+    std::cout<<param->address<<"\n";
+
+
+    if(connect(sockfd, (struct sockaddr*) &servaddr, sizeof(servaddr)) != 0){
+        std::cout<<"connection failed\n";
+        return 0;
+    }else{
+        std::cout<<"Connected to the server..\n";
+    }
+
     while(true){
+
         if(param->DATA_BUFFER->size() > 0){
             pthread_mutex_lock(param->lock);
             std::unique_ptr<Sensor> dataPtr = std::move(param->DATA_BUFFER->front());
@@ -191,7 +203,6 @@ void * senderThread(void * arg){
             pthread_mutex_unlock(param->lock);
             if(currGame.isSinglePlayer()){
                 // Get currentPlayer
-                std::cout<<"HERE";
                 int currPlayer = dataPtr->playerid() ;
                 std::cout<<currPlayer<<"\n";
                 
@@ -208,22 +219,26 @@ void * senderThread(void * arg){
                 //SERIALIZE GAME TO JSON
                 std::string JsonString;
                 currGame.serializeToJson(JsonString);
-
+                std::cout<<JsonString<<"\n";
                 //FORMAT USING PYTHON UTILITY SERVER
                 std::string encodedData = api.formatData(JsonString);
-
+                std::cout<<encodedData;
                 write(sockfd, encodedData.data(), encodedData.size());
-                int i = 0;
                 char buff[4];
-                read(sockfd,&(buff[i]), 1);
-                while(buff[i] != '_'){
-                    read(sockfd, &(buff[i]), 1);
+                char curr;
+                int i = 0;
+                read(sockfd,&curr, 1);
+                std::string size = "";
+                while(curr != '_'){
+                    buff[i] = curr;
+                    read(sockfd, &curr, 1);
                     i++;
                 }
-                buff[i] = '\0';
                 int sizeOfData = atoi(buff);
-                std::string expectedGameState(sizeOfData,' ');
+                std::vector<char> expectedGameState(sizeOfData);
                 read(sockfd,expectedGameState.data(),sizeOfData);
+                std::string expectedInString(expectedGameState.begin(),expectedGameState.end());
+                currGame.synchronise(expectedInString);
                 if(playerActionBuffer[0] == EXIT){
                     close(sockfd);
                 }
@@ -238,10 +253,22 @@ void * senderThread(void * arg){
 
 } 
 
-
-// if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)
-//         <= 0) {
-//         printf(
-//             "\nInvalid address/ Address not supported \n");
-//         return -1;
-    
+void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[2]){
+    Pyutil api(1234);
+    if(dataPtr->beetleid() == 0){
+        playActionBuffer[dataPtr->playerid() - 1] = api.predict(dataPtr);
+        std::cout<<"ACTION IS HERE";
+        std::cout<<playActionBuffer[dataPtr->playerid() - 1];
+    }
+    else{
+        std::unordered_map<std::string, int> actionStringMap = {
+        {"shield", 0},
+        {"grenade", 1},
+        {"reload", 2},
+        {"exit", 3},
+        {"shoot", 4},
+        {"none", 5}
+        };
+        playActionBuffer[dataPtr->playerid() - 1] =(Action) actionStringMap["shoot"];
+    }
+}

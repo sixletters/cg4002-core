@@ -1,7 +1,7 @@
 
 #include "player.hpp"
 #include "gameState.pb.h"
-
+#pragma once
 
 class Game {
     public:

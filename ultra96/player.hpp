@@ -9,17 +9,8 @@ enum Action {
     IDLE,
     SHOOT,
     NONE
-    };
-
-std::unordered_map<std::string, int> actionStringMap = {
-    {"shield", 0},
-    {"grenade", 1},
-    {"reload", 2},
-    {"exit", 3},
-    {"idle", 4},
-    {"shoot", 5},
-    {"none", 6}
 };
+#pragma once
 
 class Player{
     public:
@@ -32,9 +23,9 @@ class Player{
         void getDamaged(int damage);
         void getGrenade();
         void getShot();
-        void exit();
+        void exit(){};
         void setState(gameState_playerState *);
-        void synchronise(const gameState_playerState currPlayer);
+        void synchronise(const gameState_playerState *currPlayer);
 
     private:
         const int id;
@@ -45,6 +36,6 @@ class Player{
         int shield_health = 0;
         int num_deaths = 0;
         int num_shield = 3;
-        Action action = NONE;
+        Action action = (Action) NONE;
         bool activated_shield = false;
 };

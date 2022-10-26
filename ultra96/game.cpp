@@ -1,24 +1,30 @@
-#include <game.hpp>
+#include "game.hpp"
 #include <google/protobuf/util/json_util.h>
+#pragma once
 
 void Game::synchronise(std::string jsonString){
     gameState expectedGameState;
     google::protobuf::util::JsonStringToMessage(jsonString, &expectedGameState);
-    this->player1->synchronise(expectedGameState.p1());
-    this->player2->synchronise(expectedGameState.p2());
+    this->player1->synchronise(&expectedGameState.p1());
+    this->player2->synchronise(&expectedGameState.p2());
 }
 
 void Game::serializeToJson(std::string &jsonString){
+    google::protobuf::util::JsonPrintOptions printOptions;
+    printOptions.preserve_proto_field_names= true;
+    printOptions.always_print_primitive_fields = true;
     gameState currState;
     this->player1->setState(currState.mutable_p1());
     this->player2->setState(currState.mutable_p2()); 
-    google::protobuf::util::MessageToJsonString(currState, &jsonString);
+    google::protobuf::util::MessageToJsonString(currState, &jsonString, printOptions);
 }
 
 void Game::takeAction(bool (&playerShotMap)[2], Action (&playerActionBuffer)[2]){
     Action p1Action = (Action) playerActionBuffer[0];
     if(this->isSinglePlayer()){
         switch (p1Action){
+            std::cout<<"BUFFER ACTION HERE\n";
+            std::cout<<p1Action<<"\n";
             case SHOOT:
                 this->player1->shoot();
                 if(playerShotMap[1]){

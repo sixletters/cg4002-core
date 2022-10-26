@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string.h>
 #include "player.hpp"
+#include <unordered_map>
+#pragma once
 
 void Player::grenade(){
     this->action = GRENADE;
@@ -80,15 +82,23 @@ void Player::getShot(){
     this->getDamaged(10);
 }
 
-void Player::synchronise(const gameState_playerState currPlayer){
-    this->bullets = currPlayer.bullets();
-    this->hp = currPlayer.hp();
-    this->grenades = currPlayer.grenades();
-    this->shield_time = currPlayer.shield_time();
-    this->action = (Action) actionStringMap[currPlayer.action()];
-    this->num_deaths = currPlayer.num_deaths();
-    this->num_shield = currPlayer.num_shield();
-    this->shield_health = currPlayer.shield_health();
+void Player::synchronise(const gameState_playerState *currPlayer){
+    std::unordered_map<std::string, int> actionStringMap = {
+        {"shield", 0},
+        {"grenade", 1},
+        {"reload", 2},
+        {"exit", 3},
+        {"shoot", 4},
+        {"none", 5}
+    };
+    this->bullets = currPlayer->bullets();
+    this->hp = currPlayer->hp();
+    this->grenades = currPlayer->grenades();
+    this->shield_time = currPlayer->shield_time();
+    this->action = (Action) actionStringMap[currPlayer->action()];
+    this->num_deaths = currPlayer->num_deaths();
+    this->num_shield = currPlayer->num_shield();
+    this->shield_health = currPlayer->shield_health();
 }
 
 void Player::setState(gameState_playerState *currPlayer){
