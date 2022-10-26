@@ -6,6 +6,8 @@ from Cryptodome.Random import get_random_bytes
 from Crypto.Util.Padding import pad
 key = "connecttoevalkey".encode("utf-8")
 iv = get_random_bytes(AES.block_size)
+import sensor_pb2 as proto
+import numpy as np
 
 def formatData(gameState, key, iv):
     cipher = AES.new(key, AES.MODE_CBC, iv)
@@ -27,7 +29,20 @@ if __name__ == '__main__':
                 apiRequestType = conn.recv(1)
                 payload = conn.recv(2048)
                 if apiRequestType == b'\x00':
-                  prediction = str(4).encode("utf-8")
+                  sensor = proto.Sensor()
+                  sensor.ParseFromString(payload)
+                  predictionInputs = [[],[],[],[],[],[]]
+                  for i in sensor.payload:
+                    predictionInputs[0].append(i.a1)
+                    predictionInputs[1].append(i.a2)
+                    predictionInputs[2].append(i.a3)
+                    predictionInputs[3].append(i.g1)
+                    predictionInputs[4].append(i.g2)
+                    predictionInputs[5].append(i.g3)
+
+                  inputs = np.asarray(predictionInputs, dtype=np.single)
+                  print(inputs)
+                  prediction = str(1).encode("utf-8")
                   conn.sendall(prediction)
                 else:
                   encoded = formatData(payload,key,iv)

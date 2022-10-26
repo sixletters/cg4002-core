@@ -53,7 +53,7 @@ def init(dataBuffer):
 
 def init2(dataBuffer):
     dataBuffer.put({'playerID':1,'beetleID': 0, "payload":{'a1': 1.0, 'a2': 2.0 , 'a3': 1.0, "g1": 1.0, "g2":1.0, "g3": 1.0}})
-    dataBuffer.put({'playerID':1,'beetleID': 1})
+    # dataBuffer.put({'playerID':1,'beetleID': 1})
     dataBuffer.put({'playerID':1,'beetleID': 0, "payload":{'a1': 1.1, 'a2': 2.0 , 'a3': 1.0, "g1": 1.0, "g2":1.0, "g3": 1.0}})
     dataBuffer.put({'playerID':1,'beetleID': 0, "payload":{'a1': 1.2, 'a2': 2.0 , 'a3': 1.0, "g1": 1.0, "g2":1.0, "g3": 1.0}})
     dataBuffer.put({'playerID':1,'beetleID': 0, "payload":{'a1': 1.3, 'a2': 2.0 , 'a3': 1.0, "g1": 1.0, "g2":1.0, "g3": 1.0}})

@@ -21,10 +21,10 @@ void Game::serializeToJson(std::string &jsonString){
 
 void Game::takeAction(bool (&playerShotMap)[2], Action (&playerActionBuffer)[2]){
     Action p1Action = (Action) playerActionBuffer[0];
+    std::cout<<"BUFFER ACTION IS HERE 2\n";
+    std::cout<<p1Action;
     if(this->isSinglePlayer()){
         switch (p1Action){
-            std::cout<<"BUFFER ACTION HERE\n";
-            std::cout<<p1Action<<"\n";
             case SHOOT:
                 this->player1->shoot();
                 if(playerShotMap[1]){
@@ -47,6 +47,7 @@ void Game::takeAction(bool (&playerShotMap)[2], Action (&playerActionBuffer)[2])
             default:
                 break;
         }
+        std::cout<<" JL IT IS"<<this->player1->getAction()<<"\n";
     }else{
         Action p2Action = (Action) playerActionBuffer[1];
         if(p2Action == SHIELD){

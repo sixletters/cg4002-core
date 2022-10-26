@@ -26,7 +26,9 @@ class Player{
         void exit(){};
         void setState(gameState_playerState *);
         void synchronise(const gameState_playerState *currPlayer);
-
+        Action getAction(){
+            return this->action;
+        }
     private:
         const int id;
         int hp = 100;

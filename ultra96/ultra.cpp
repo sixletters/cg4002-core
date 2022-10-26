@@ -213,7 +213,6 @@ void * senderThread(void * arg){
                 // PARSE AND FIND ACTION AND PUT IT IN PLAYERACTION BUFFER
                 payloadParser(dataPtr, playerActionBuffer);
 
-                // GAME TAKES ACTION
                 currGame.takeAction(playerShotMap, playerActionBuffer);
             
                 //SERIALIZE GAME TO JSON
@@ -257,8 +256,6 @@ void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[
     Pyutil api(1234);
     if(dataPtr->beetleid() == 0){
         playActionBuffer[dataPtr->playerid() - 1] = api.predict(dataPtr);
-        std::cout<<"ACTION IS HERE";
-        std::cout<<playActionBuffer[dataPtr->playerid() - 1];
     }
     else{
         std::unordered_map<std::string, int> actionStringMap = {
