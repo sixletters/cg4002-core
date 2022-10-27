@@ -9,9 +9,12 @@ iv = get_random_bytes(AES.block_size)
 import sensor_pb2 as proto
 import numpy as np
 import predict
-from tensorflow import keras
+from pynq import Overlay
+# from tensorflow import keras
 
-model = keras.models.load_model('./testModel_64x64_15hz_9features_left/')
+# model = keras.models.load_model('./testModel_64x64_15hz_9features_left/')
+overlay = Overlay('/home/xilinx/cg4002-core/Ultra96/utility-server/testModel_64x64_15hz_9features_left/design_3_wrapper.bit')
+dma = overlay.axi_dma_0
 
 def formatData(gameState, key, iv):
     cipher = AES.new(key, AES.MODE_CBC, iv)
@@ -44,7 +47,7 @@ if __name__ == '__main__':
                     predictionInputs[4].append(i.g2)
                     predictionInputs[5].append(i.g3)
 
-                  prediction = predict.test_predict(predictionInputs, model)
+                  prediction = predict.predicts(predictionInputs, dma)
                   prediction = str(prediction).encode("utf-8")
                   conn.sendall(prediction)
                 else:
