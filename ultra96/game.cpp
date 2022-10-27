@@ -1,6 +1,6 @@
 #include "game.hpp"
 #include <google/protobuf/util/json_util.h>
-#pragma once
+// #pragma once
 
 void Game::synchronise(std::string jsonString){
     gameState expectedGameState;

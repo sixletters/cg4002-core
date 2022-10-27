@@ -52,9 +52,10 @@ int main(int argc, char** argv){
     if(argc < 2){
         std::cout<<"NOT ENOUGH ARGUMENTS";
     }
-    sharedParams.address = argv[0];
-    sharedParams.port = atoi(argv[1]);
-    std::cout<<"Please indicate the number of players";
+    sharedParams.address = argv[1];
+    sharedParams.port = atoi(argv[2]);
+
+    std::cout<<"Please indicate the number of players: ";
     std::cin>>sharedParams.numberOfplayers;
     if(sharedParams.numberOfplayers < 1 || sharedParams.numberOfplayers > 2){
         std::cout<<"Illegal number of players\n";
@@ -179,9 +180,8 @@ void * senderThread(void * arg){
  
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr.s_addr);
-    // servaddr.sin_addr.s_addr = inet_addr(IN6ADDR_ANY_INIT);
-    // servaddr.sin_port = htons(param->port);
+    inet_pton(AF_INET, param->address, &servaddr.sin_addr.s_addr);
+    servaddr.sin_port = htons(param->port);
     servaddr.sin_port = htons(8090);
     std::cout<<param->port<<"\n";
     std::cout<<param->address<<"\n";
