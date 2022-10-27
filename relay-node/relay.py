@@ -9,7 +9,7 @@ import json
 import util
 import threading
 import math
-# from connect import internalComms
+from connect import internalComms
 import struct  
 WINDOW_LEN = 25
 A_THRESHOLD = 1.2
@@ -50,8 +50,8 @@ def relayProcess(dataBuffer, lock):
                 if len(P1_IMU_DATA_BUFFER) >= WINDOW_LEN:
                     serializedData, idleCheck = util.dataTransformation(P1_IMU_DATA_BUFFER)
                     length = len(serializedData).to_bytes(4,'little')
-                    # if not idleCheck:
-                    #     print("SENDING")
+                    if not idleCheck:
+                        print("SENDING")
                     sendToUltra96(length + serializedData)
                     P1_IMU_DATA_BUFFER = []
                     collect_for_1 = False
@@ -74,11 +74,11 @@ if __name__ == '__main__':
     dataBuffer = mp.Queue()
     lock = mp.Lock()
     relay = mp.Process(target=relayProcess, args=(dataBuffer, lock))
-    # internalCommsProcess = mp.Process(target=internalComms, args=(dataBuffer, lock))
+    internalCommsProcess = mp.Process(target=internalComms, args=(dataBuffer, lock))
     # init(dataBuffer)
-    test.init2(dataBuffer)
+    # test.init2(dataBuffer)
     relay.start()
-    # internalCommsProcess.start()
+    internalCommsProcess.start()
     relay.join()
-    # internalCommsProcess.join()
+    internalCommsProcess.join()
     

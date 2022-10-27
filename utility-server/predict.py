@@ -155,7 +155,7 @@ def predicts2(inputs, dma):
 def test_predict(inputs, model): # predict function for software ai
     features = [] # 9 x 6
     inputs = np.asarray(inputs, dtype=np.single)
-    inputs = inputs.transpose()
+    #inputs = inputs.transpose()
     acc_x = normalize(inputs[0]) # array of 15 datapoints 
     acc_y = normalize(inputs[1]) # array of 15 datapoints 
     acc_z = normalize(inputs[2]) # array of 15 datapoints 

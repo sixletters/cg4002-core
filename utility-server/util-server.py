@@ -8,6 +8,10 @@ key = "connecttoevalkey".encode("utf-8")
 iv = get_random_bytes(AES.block_size)
 import sensor_pb2 as proto
 import numpy as np
+import predict
+from tensorflow import keras
+
+model = keras.models.load_model('./testModel_64x64_15hz_9features_left/')
 
 def formatData(gameState, key, iv):
     cipher = AES.new(key, AES.MODE_CBC, iv)
@@ -40,9 +44,8 @@ if __name__ == '__main__':
                     predictionInputs[4].append(i.g2)
                     predictionInputs[5].append(i.g3)
 
-                  inputs = np.asarray(predictionInputs, dtype=np.single)
-                  print(inputs)
-                  prediction = str(1).encode("utf-8")
+                  prediction = predict.test_predict(predictionInputs, model)
+                  prediction = str(prediction).encode("utf-8")
                   conn.sendall(prediction)
                 else:
                   encoded = formatData(payload,key,iv)
