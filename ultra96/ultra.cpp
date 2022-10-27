@@ -255,7 +255,9 @@ void * senderThread(void * arg){
 void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[2]){
     Pyutil api(1234);
     if(dataPtr->beetleid() == 0){
+        std::cout<<"AI PREDICTION IS HERE ------------------:   ";
         playActionBuffer[dataPtr->playerid() - 1] = api.predict(dataPtr);
+        std::cout<<playActionBuffer[dataPtr->playerid() - 1];
     }
     else{
         std::unordered_map<std::string, int> actionStringMap = {

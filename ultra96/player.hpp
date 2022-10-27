@@ -6,7 +6,6 @@ enum Action {
     GRENADE,
     RELOAD,
     EXIT,
-    IDLE,
     SHOOT,
     NONE
 };
