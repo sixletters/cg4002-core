@@ -122,6 +122,7 @@ void Player::setState(gameState_playerState *currPlayer){
             currPlayer->set_action("none");
             break;
     }
+    std::cout<<currPlayer->action()<<"\n";
     currPlayer->set_bullets(this->bullets);
     currPlayer->set_hp(this->hp);
     currPlayer->set_num_deaths(this->num_deaths);
