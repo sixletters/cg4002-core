@@ -17,6 +17,8 @@
 #include <queue>
 #include <google/protobuf/util/json_util.h>
 #include "pyutil.cpp"
+#include <chrono>
+#include <thread>
 #define SA struct sockaddr
 #define MAX 80
 #define PORT 8080
@@ -27,6 +29,7 @@
 void *receiverThread(void * arg);
 void *senderThread(void * arg);
 void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[2]);
+std::string sendToEvalServer(Game &currGame,int &sockfd,Pyutil &api);
 
 // Params to be shared by thread
 struct threadParams{
@@ -167,6 +170,7 @@ void * senderThread(void * arg){
     Pyutil api(1234);
     int sockfd;
     struct sockaddr_in servaddr;
+    bool waitFlag = true;
  
     // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -213,43 +217,56 @@ void * senderThread(void * arg){
                 // PARSE AND FIND ACTION AND PUT IT IN PLAYERACTION BUFFER
                 payloadParser(dataPtr, playerActionBuffer);
 
+                //Adjust game state with player Action Buffer
                 currGame.takeAction(playerShotMap, playerActionBuffer);
-            
-                //SERIALIZE GAME TO JSON
-                std::string JsonString;
-                currGame.serializeToJson(JsonString);
-                std::cout<<JsonString<<"\n";
-                //FORMAT USING PYTHON UTILITY SERVER
-                std::string encodedData = api.formatData(JsonString);
-                std::cout<<encodedData;
-                write(sockfd, encodedData.data(), encodedData.size());
-                char buff[4];
-                char curr;
-                int i = 0;
-                read(sockfd,&curr, 1);
-                std::string size = "";
-                while(curr != '_'){
-                    buff[i] = curr;
-                    read(sockfd, &curr, 1);
-                    i++;
-                }
-                int sizeOfData = atoi(buff);
-                std::vector<char> expectedGameState(sizeOfData);
-                read(sockfd,expectedGameState.data(),sizeOfData);
-                std::string expectedInString(expectedGameState.begin(),expectedGameState.end());
-                currGame.synchronise(expectedInString);
+
+                // Send to evalserver and get expected game state
+                std::string serializedExpectedGameState = sendToEvalServer(currGame, sockfd,api);
+                currGame.synchronise(serializedExpectedGameState);
                 if(playerActionBuffer[0] == EXIT){
                     close(sockfd);
                 }
                 for(int i=0;i<2;i++){
                     playerShotMap[i] =false;
                 }
-            }
+            }else{
+                int currPlayer = dataPtr->playerid();
 
+                if(playerFlags[currPlayer-1] && ((dataPtr->beetleid()%3) != 2))continue;
+
+                if((dataPtr->beetleid()%3) == 2){
+                    playerShotMap[currPlayer-1] = true;
+                    continue;
+                }
+
+                playerFlags[currPlayer-1] = true;
+                std::cout<<"CURRENT PLAYER HERE " << currPlayer <<"\n"; 
+                payloadParser(dataPtr, playerActionBuffer);
+                std::cout<< playerFlags[0]<<"\n";
+                std::cout<< playerFlags[1]<<"\n";
+            }
+        }
+
+        if(!currGame.isSinglePlayer() && playerFlags[0] && playerFlags[1]){
+            if(waitFlag){
+                waitFlag = false;
+                std::this_thread::sleep_for(std::chrono::milliseconds(250));
+                continue;
+            }
+            currGame.takeAction(playerShotMap, playerActionBuffer);
+            std::string serializedExpectedGameState = sendToEvalServer(currGame, sockfd,api);
+            currGame.synchronise(serializedExpectedGameState);
+            if(playerActionBuffer[0] == EXIT){
+                close(sockfd);
+            }
+            for(int i=0;i<2;i++){
+                playerShotMap[i] =false;
+                playerFlags[i] = false;
+            }
+            waitFlag = true;
         }
     }
     close(sockfd);
-
 } 
 
 void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[2]){
@@ -270,4 +287,35 @@ void payloadParser(std::unique_ptr<Sensor> &dataPtr, Action (&playActionBuffer)[
         };
         playActionBuffer[dataPtr->playerid() - 1] =(Action) actionStringMap["shoot"];
     }
+}
+
+std::string sendToEvalServer(Game &currGame,int &sockfd,Pyutil &api){
+
+            // Serialize to Json
+            std::string JsonString;
+            currGame.serializeToJson(JsonString);
+
+            //FORMAT USING PYTHON UTILITY SERVER
+            std::string encodedData = api.formatData(JsonString);
+            std::cout<<encodedData;
+
+            // Write to Buffer and send the encdoded data
+            write(sockfd, encodedData.data(), encodedData.size());
+            char buff[4];
+            char curr;
+            int i = 0;
+
+            // Read the expected Game State;
+            read(sockfd,&curr, 1);
+            std::string size = "";
+            while(curr != '_'){
+                buff[i] = curr;
+                read(sockfd, &curr, 1);
+                i++;
+            }
+            int sizeOfData = atoi(buff);
+            std::vector<char> expectedGameState(sizeOfData);
+            read(sockfd,expectedGameState.data(),sizeOfData);
+            std::string expectedInString(expectedGameState.begin(),expectedGameState.end());
+            return expectedInString;
 }

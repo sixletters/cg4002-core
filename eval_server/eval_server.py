@@ -328,7 +328,6 @@ class Server(threading.Thread):
 
         decrypted_message = cipher.decrypt(decoded_message[AES.block_size:])  # Perform decryption
         decrypted_message = unpad(decrypted_message, AES.block_size)
-        print(decrypted_message)
         decrypted_message = decrypted_message.decode('utf8')  # Decode bytes into utf-8
 
         ret = json.loads(decrypted_message)
@@ -339,22 +338,19 @@ class Server(threading.Thread):
         try:
             # recv length followed by '_' followed by cypher
             data = b''
-            count = 0
             while not data.endswith(b'_'):
                 _d = self.connection.recv(1)
                 if not _d:
                     data = b''
                     break
                 data += _d
-                count += 1
-    
             if len(data) == 0:
                 print('no more data from the client')
                 self.stop()
 
             data = data.decode("utf-8")
             length = int(data[:-1])
-            
+
             data = b''
             while len(data) < length:
                 _d = self.connection.recv(length - len(data))
@@ -367,7 +363,6 @@ class Server(threading.Thread):
                 self.stop()
             msg = data.decode("utf8")  # Decode raw bytes to UTF-8
             game_state_received = self.decrypt_message(msg)
-            print(game_state_received)
         except ConnectionResetError:
             print('Connection Reset')
             self.stop()
@@ -383,7 +378,7 @@ class Server(threading.Thread):
         # Listen for incoming connections
         self.server_socket.listen(1)
         self.secret_key = self.setup_connection()      # Wait for secret key from Ultra96
-        
+
         while not self.shutdown.is_set():
             try:
                 game_state_received = self.recv_game_state()

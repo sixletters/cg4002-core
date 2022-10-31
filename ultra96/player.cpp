@@ -7,6 +7,10 @@
 #include <string.h>
 #include "player.hpp"
 #include <unordered_map>
+#include <ctime>
+#include <chrono>
+#include <sys/time.h>
+#include <unistd.h>
 #pragma once
 
 void Player::grenade(){
@@ -16,23 +20,13 @@ void Player::grenade(){
     }
 }
 
-void *Player::shield_health_counter(void* arg){
-    this->shield_time = 10;
-    while(this->shield_time > 0){
-        sleep(1);
-        this->shield_time--;
-    }
-    this->activated_shield = false;
-}
-
 void Player::shield(){
     this->action = SHIELD;
-    int ret;
-    pthread_t my_thread;
-    void * ret_join;
     if(this->num_shield && !this->activated_shield){
+        this->shield_health = 30;
         this->activated_shield= true;
-        
+        this->activated_shield_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+        this->num_shield--;
     }
 }
 
@@ -52,6 +46,15 @@ void Player::reload(){
 }
 
 void Player::getDamaged(int damage){
+    if(this->activated_shield){
+        time_t millisec_since_epoch_1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+        float currTime_1 = ((float)millisec_since_epoch_1) / 1000;
+        if((currTime_1 - ((float)this->activated_shield_time) / 1000) > 10.0){
+            this->activated_shield = false;
+            this->shield_health = 0;
+        };
+    }
+
     if(this->activated_shield){
         if(this->shield_health > damage){
             this->shield_health -= damage;
@@ -123,6 +126,17 @@ void Player::setState(gameState_playerState *currPlayer){
             break;
     }
     std::cout<<currPlayer->action()<<"\n";
+    time_t millisec_since_epoch_1 = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+    float shield_time = (((float)millisec_since_epoch_1) / 1000) - (((float)this->activated_shield_time) / 1000);
+    
+    if(shield_time > 10.0){
+        this->activated_shield = false;
+        this->shield_time = 0;
+         this->shield_health = 0;
+    }else{
+         this->shield_time = 10.0 - shield_time;
+    }
+
     currPlayer->set_bullets(this->bullets);
     currPlayer->set_hp(this->hp);
     currPlayer->set_num_deaths(this->num_deaths);

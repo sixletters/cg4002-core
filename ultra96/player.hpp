@@ -1,5 +1,6 @@
 #include <string>
 #include "gameState.pb.h"
+#include <ctime>
 
 enum Action { 
     SHIELD,
@@ -15,7 +16,6 @@ class Player{
     public:
         Player(int id): id(id){};
         void grenade();
-        void* shield_health_counter(void*);
         void shield();
         void reload();
         void shoot();
@@ -33,10 +33,11 @@ class Player{
         int hp = 100;
         int bullets = 6;
         int grenades = 2;
-        float shield_time = 0.0;
+        float shield_time = 0;
         int shield_health = 0;
         int num_deaths = 0;
         int num_shield = 3;
         Action action = (Action) NONE;
+        std::time_t activated_shield_time;
         bool activated_shield = false;
 };
