@@ -19,12 +19,14 @@
 #include "pyutil.cpp"
 #include <chrono>
 #include <thread>
+#include <semaphore.h>
 #define SA struct sockaddr
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
 #define BACKLOG 10
 #define size_t socklen_t
+#define MAXBUFFERSIZE 30
 
 void *receiverThread(void * arg);
 void *senderThread(void * arg);
@@ -34,6 +36,8 @@ std::string sendToEvalServer(Game &currGame,int &sockfd,Pyutil &api);
 // Params to be shared by thread
 struct threadParams{
     pthread_mutex_t *lock;
+    sem_t *empty_space;
+    sem_t *fill_space;
     std::queue<std::unique_ptr<Sensor>> * DATA_BUFFER;
     int numberOfplayers;
     int port;
@@ -44,6 +48,11 @@ struct threadParams{
 int main(int argc, char** argv){
     std::queue<std::unique_ptr<Sensor>> DATA_BUFFER;
     pthread_mutex_t lock;
+    sem_t empty_space;
+    sem_t fill_space;
+    sem_init(&empty_space, 0, MAXBUFFERSIZE);
+    sem_init(&fill_space, 0, 0);
+    
     threadParams sharedParams;
        pthread_t receiver_thread, sender_thread;
     if (pthread_mutex_init(&lock, NULL) != 0) {
@@ -52,6 +61,8 @@ int main(int argc, char** argv){
     }
     sharedParams.lock = &lock;
     sharedParams.DATA_BUFFER = &DATA_BUFFER;
+    sharedParams.empty_space = &empty_space;
+    sharedParams.fill_space = &fill_space;
     if(argc < 2){
         std::cout<<"NOT ENOUGH ARGUMENTS";
     }
@@ -76,6 +87,8 @@ int main(int argc, char** argv){
     }
     exit(EXIT_SUCCESS);
     pthread_mutex_destroy(&lock);
+    sem_destroy(&fill_space);
+    sem_destroy(&empty_space);
 }
 
 
@@ -150,9 +163,11 @@ void * receiverThread(void *arg){
         // std::cout<<sensorPtr->payload().size()<<"\n";
 
         // acquire lock and push into databuffer
+        // sem_wait(param->empty_space);
         pthread_mutex_lock(param->lock);
         param->DATA_BUFFER->push(std::move(sensorPtr));
         pthread_mutex_unlock(param->lock);
+        // sem_post(param->fill_space);
 
         //close connection
         close(connfd);
@@ -186,7 +201,6 @@ void * senderThread(void * arg){
     servaddr.sin_family = AF_INET;
     inet_pton(AF_INET, param->address, &servaddr.sin_addr.s_addr);
     servaddr.sin_port = htons(param->port);
-    servaddr.sin_port = htons(8090);
     std::cout<<param->port<<"\n";
     std::cout<<param->address<<"\n";
 
@@ -201,10 +215,12 @@ void * senderThread(void * arg){
     while(true){
 
         if(param->DATA_BUFFER->size() > 0){
+            // sem_wait(param->fill_space);
             pthread_mutex_lock(param->lock);
             std::unique_ptr<Sensor> dataPtr = std::move(param->DATA_BUFFER->front());
             param->DATA_BUFFER->pop();
             pthread_mutex_unlock(param->lock);
+            // sem_post(param->empty_space);
             if(currGame.isSinglePlayer()){
                 // Get currentPlayer
                 int currPlayer = dataPtr->playerid() ;
@@ -294,6 +310,8 @@ std::string sendToEvalServer(Game &currGame,int &sockfd,Pyutil &api){
             // Serialize to Json
             std::string JsonString;
             currGame.serializeToJson(JsonString);
+
+            std::cout<<JsonString;
 
             //FORMAT USING PYTHON UTILITY SERVER
             std::string encodedData = api.formatData(JsonString);

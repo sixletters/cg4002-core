@@ -3,6 +3,7 @@ import csv
 HOST = "0.0.0.0"
 import struct
 MYTCP_PORT = 8080
+PREDICTION_PORT = 1234
 import multiprocessing as mp
 import sensor_pb2
 import json
@@ -18,6 +19,13 @@ import test
 def sendToUltra96(data):
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((HOST, MYTCP_PORT))
+    sock.send(data)
+    sock.close()
+
+
+def sendToPrediction(data):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((HOST, PREDICTION_PORT))
     sock.send(data)
     sock.close()
 
@@ -50,8 +58,9 @@ def relayProcess(dataBuffer, lock):
                 if len(P1_IMU_DATA_BUFFER) >= WINDOW_LEN:
                     serializedData, idleCheck = util.dataTransformation(P1_IMU_DATA_BUFFER)
                     length = len(serializedData).to_bytes(4,'little')
-                    if not idleCheck:
-                        print("SENDING")
+                    # if not idleCheck:
+                    print("SENDING")
+                    #sendToPrediction(b'0x00' + serializedData)
                     sendToUltra96(length + serializedData)
                     P1_IMU_DATA_BUFFER = []
                     collect_for_1 = False
@@ -61,9 +70,10 @@ def relayProcess(dataBuffer, lock):
                 if len(P2_IMU_DATA_BUFFER) >= WINDOW_LEN:
                     serializedData, idleCheck = util.dataTransformation(P2_IMU_DATA_BUFFER)
                     length = len(serializedData).to_bytes(4,'little')
-                    if not idleCheck:
-                        print("SENDING")
-                        sendToUltra96(length + serializedData)
+                    # if not idleCheck:
+                    print("SENDING")
+                    #sendToPrediction(b'0x00' + serializedData)
+                    sendToUltra96(length + serializedData)
                     P2_IMU_DATA_BUFFER = []
                     collect_for_2 = False
 

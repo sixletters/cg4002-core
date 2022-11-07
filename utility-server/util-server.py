@@ -8,14 +8,14 @@ key = "connecttoevalkey".encode("utf-8")
 iv = get_random_bytes(AES.block_size)
 import sensor_pb2 as proto
 import numpy as np
-# import predict
-# from pynq import Overlay
-# from tensorflow import keras
+import predict
+from pynq import Overlay
+from tensorflow import keras
 
-# model = keras.models.load_model('./testModel_64x64_15hz_9features_left/')
-# overlay = Overlay('/home/xilinx/cg4002-core/Ultra96/utility-server/testModel_64x64_15hz_9features_left/design_3_wrapper.bit')
-# dma = overlay.axi_dma_0
-
+model = keras.models.load_model('./testModel_64x64_15hz_9features_left/')
+overlay = Overlay('/home/xilinx/cg4002-core/Ultra96/utility-server/testModel_64x64_15hz_9features_left/design_3_wrapper.bit')
+dma = overlay.axi_dma_0
+actionString = ["shield", "grenade","reload","exit"]
 def formatData(gameState, key, iv):
     cipher = AES.new(key, AES.MODE_CBC, iv)
     gameStateData = pad(gameState, AES.block_size)
@@ -48,9 +48,12 @@ if __name__ == '__main__':
                     predictionInputs[5].append(i.g3)
 
                   # prediction = predict.predicts(predictionInputs, dma)
+                  # print(actionString[prediction])
                   # prediction = str(prediction).encode("utf-8")
-                  prediction = str("0").encode("utf-8")
+                  # prediction = str("0").encode("utf-8")
+                  prediction = str(input(f"PLEASE ENTER ACTION FOR PLAYER {sensor.playerID}")).encode("utf-8")
                   conn.sendall(prediction)
+                  conn.close()
                 else:
                   encoded = formatData(payload,key,iv)
                   prefix = (str(len(encoded)) + "_").encode("utf-8")
