@@ -4,6 +4,8 @@
 
 The computer engineering capstone consists of a laser tag game where 2 players an play at any point in time.
 
+## Systems Architecture
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true](https://github.com/sixletters/cg4002-core/blob/main/Screenshot%202022-11-13%20at%209.38.38%20PM.png)
 
 ## External Communications 
 #### dependencies
