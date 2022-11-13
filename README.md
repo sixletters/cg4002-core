@@ -12,6 +12,8 @@ The computer engineering capstone consists of a laser tag game where 2 players a
 - Protobuf compiler. To download the protobuf library please follow the information at https://developers.google.com/protocol-buffers/docs/downloads
 - Vivado + Vivado HLS 2020.1
 - Ultra96 Board + Pynq OS 
+- Bluepy
+- Numpy
 ### starting the external communications processes. 
 first set up a SSH tunnel with the following commands
 ```sh
