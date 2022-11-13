@@ -98,6 +98,7 @@ void Player::synchronise(const gameState_playerState *currPlayer){
     this->hp = currPlayer->hp();
     this->grenades = currPlayer->grenades();
     this->shield_time = currPlayer->shield_time();
+    this->activated_shield = (this->shield_time > 0.0);
     this->action = (Action) actionStringMap[currPlayer->action()];
     this->num_deaths = currPlayer->num_deaths();
     this->num_shield = currPlayer->num_shield();

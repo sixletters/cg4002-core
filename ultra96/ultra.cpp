@@ -256,10 +256,7 @@ void * senderThread(void * arg){
                 }
 
                 playerFlags[currPlayer-1] = true;
-                std::cout<<"CURRENT PLAYER HERE " << currPlayer <<"\n"; 
                 payloadParser(dataPtr, playerActionBuffer);
-                std::cout<< playerFlags[0]<<"\n";
-                std::cout<< playerFlags[1]<<"\n";
             }
         }
 

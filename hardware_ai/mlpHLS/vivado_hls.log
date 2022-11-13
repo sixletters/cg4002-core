@@ -1,0 +1,85 @@
+INFO: Applying HLS Y2K22 patch v1.2 for IP revision
+INFO: [HLS 200-10] Running 'C:/Xilinx/Vivado/2020.1/bin/unwrapped/win64.o/vivado_hls.exe'
+INFO: [HLS 200-10] For user 'tengk' on host 'teng-dell' (Windows NT_amd64 version 6.2) on Sun Nov 13 14:22:00 +0800 2022
+INFO: [HLS 200-10] In directory 'C:/Users/tengk/CG4002/mlpHLS'
+Sourcing Tcl script 'C:/Users/tengk/CG4002/mlpHLS/mlp_HLS/solution1/csynth.tcl'
+INFO: [HLS 200-10] Opening project 'C:/Users/tengk/CG4002/mlpHLS/mlp_HLS'.
+INFO: [HLS 200-10] Adding design file 'mlp_HLS.cpp' to the project
+INFO: [HLS 200-10] Opening solution 'C:/Users/tengk/CG4002/mlpHLS/mlp_HLS/solution1'.
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [HLS 200-10] Setting target device to 'xczu3eg-sbva484-1-i'
+INFO: [SYN 201-201] Setting up clock 'default' with a period of 10ns.
+INFO: [SCHED 204-61] Option 'relax_ii_for_timing' is enabled, will increase II to preserve clock frequency constraints.
+INFO: [HLS 200-10] Analyzing design file 'mlp_HLS.cpp' ... 
+INFO: [HLS 200-111] Finished Linking Time (s): cpu = 00:00:07 ; elapsed = 00:01:00 . Memory (MB): peak = 935.863 ; gain = 842.770
+INFO: [HLS 200-111] Finished Checking Pragmas Time (s): cpu = 00:00:07 ; elapsed = 00:01:00 . Memory (MB): peak = 935.863 ; gain = 842.770
+INFO: [HLS 200-10] Starting code transformations ...
+INFO: [HLS 200-111] Finished Standard Transforms Time (s): cpu = 00:00:07 ; elapsed = 00:01:02 . Memory (MB): peak = 935.863 ; gain = 842.770
+INFO: [HLS 200-10] Checking synthesizability ...
+INFO: [HLS 200-111] Finished Checking Synthesizability Time (s): cpu = 00:00:07 ; elapsed = 00:01:02 . Memory (MB): peak = 935.863 ; gain = 842.770
+INFO: [XFORM 203-501] Unrolling loop 'Loop-3.1' (mlp_HLS.cpp:81) in function 'mlp_HLS' partially with a factor of 2.
+INFO: [XFORM 203-501] Unrolling loop 'Loop-4.1' (mlp_HLS.cpp:98) in function 'mlp_HLS' partially with a factor of 2.
+INFO: [XFORM 203-501] Unrolling loop 'Loop-5.1' (mlp_HLS.cpp:125) in function 'mlp_HLS' partially with a factor of 2.
+INFO: [XFORM 203-102] Automatically partitioning small array 'outputBias' completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'outputLayer' (mlp_HLS.cpp:56) completely based on array size.
+INFO: [XFORM 203-102] Automatically partitioning small array 'output' (mlp_HLS.cpp:57) completely based on array size.
+INFO: [XFORM 203-101] Partitioning array 'outputBias' in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'outputLayer' (mlp_HLS.cpp:56) in dimension 1 completely.
+INFO: [XFORM 203-101] Partitioning array 'output' (mlp_HLS.cpp:57) in dimension 1 completely.
+INFO: [XFORM 203-401] Performing if-conversion on hyperblock from (mlp_HLS.cpp:57:30) to (mlp_HLS.cpp:57:30) in function 'mlp_HLS'... converting 6 basic blocks.
+INFO: [HLS 200-111] Finished Pre-synthesis Time (s): cpu = 00:00:07 ; elapsed = 00:01:03 . Memory (MB): peak = 935.863 ; gain = 842.770
+INFO: [HLS 200-472] Inferring partial write operation for 'training_input' (mlp_HLS.cpp:62:3)
+INFO: [HLS 200-472] Inferring partial write operation for 'hidden1Layer' (mlp_HLS.cpp:89:4)
+INFO: [HLS 200-472] Inferring partial write operation for 'hidden2Layer' (mlp_HLS.cpp:103:4)
+INFO: [HLS 200-111] Finished Architecture Synthesis Time (s): cpu = 00:00:08 ; elapsed = 00:01:03 . Memory (MB): peak = 935.863 ; gain = 842.770
+INFO: [HLS 200-10] Starting hardware synthesis ...
+INFO: [HLS 200-10] Synthesizing 'mlp_HLS' ...
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-42] -- Implementing module 'mlp_HLS' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [SCHED 204-11] Starting scheduling ...
+INFO: [SCHED 204-11] Finished scheduling.
+INFO: [HLS 200-111]  Elapsed time: 64.084 seconds; current allocated memory: 104.352 MB.
+INFO: [BIND 205-100] Starting micro-architecture generation ...
+INFO: [BIND 205-101] Performing variable lifetime analysis.
+INFO: [BIND 205-101] Exploring resource sharing.
+INFO: [BIND 205-101] Binding ...
+INFO: [BIND 205-100] Finished micro-architecture generation.
+INFO: [HLS 200-111]  Elapsed time: 0.352 seconds; current allocated memory: 105.282 MB.
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [HLS 200-10] -- Generating RTL for module 'mlp_HLS' 
+INFO: [HLS 200-10] ----------------------------------------------------------------
+INFO: [RTGEN 206-500] Setting interface mode on port 'mlp_HLS/S_AXIS_V_data' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'mlp_HLS/S_AXIS_V_last' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'mlp_HLS/M_AXIS_V_data' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on port 'mlp_HLS/M_AXIS_V_last' to 'axis' (register, both mode).
+INFO: [RTGEN 206-500] Setting interface mode on function 'mlp_HLS' to 'ap_ctrl_none'.
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_layer1Weight' to 'mlp_HLS_layer1Weibkb' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_layer2Weight' to 'mlp_HLS_layer2Weicud' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_outputWeight' to 'mlp_HLS_outputWeidEe' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_training_input' to 'mlp_HLS_training_eOg' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_hidden1Layer' to 'mlp_HLS_hidden1LafYi' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_hidden2Layer' to 'mlp_HLS_hidden2Lag8j' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_fadd_32ns_32ns_32_4_full_dsp_1' to 'mlp_HLS_fadd_32nshbi' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_fmul_32ns_32ns_32_3_max_dsp_1' to 'mlp_HLS_fmul_32nsibs' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_fcmp_32ns_32ns_1_2_1' to 'mlp_HLS_fcmp_32nsjbC' due to the length limit 20
+INFO: [SYN 201-210] Renamed object name 'mlp_HLS_mux_42_32_1_1' to 'mlp_HLS_mux_42_32kbM' due to the length limit 20
+INFO: [RTGEN 206-100] Generating core module 'mlp_HLS_fadd_32nshbi': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mlp_HLS_fcmp_32nsjbC': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mlp_HLS_fmul_32nsibs': 1 instance(s).
+INFO: [RTGEN 206-100] Generating core module 'mlp_HLS_mux_42_32kbM': 3 instance(s).
+INFO: [RTGEN 206-100] Finished creating RTL model for 'mlp_HLS'.
+INFO: [HLS 200-111]  Elapsed time: 0.793 seconds; current allocated memory: 107.087 MB.
+INFO: [HLS 200-790] **** Loop Constraint Status: All loop constraints were satisfied.
+INFO: [HLS 200-789] **** Estimated Fmax: 102.35 MHz
+INFO: [RTMG 210-279] Implementing memory 'mlp_HLS_layer1Bias_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'mlp_HLS_layer1Weibkb_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'mlp_HLS_layer2Bias_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'mlp_HLS_layer2Weicud_rom' using auto ROMs.
+INFO: [RTMG 210-279] Implementing memory 'mlp_HLS_outputWeidEe_rom' using auto ROMs.
+INFO: [RTMG 210-278] Implementing memory 'mlp_HLS_training_eOg_ram (RAM)' using block RAMs.
+INFO: [RTMG 210-278] Implementing memory 'mlp_HLS_hidden1LafYi_ram (RAM)' using block RAMs.
+INFO: [HLS 200-111] Finished generating all RTL models Time (s): cpu = 00:00:17 ; elapsed = 00:01:16 . Memory (MB): peak = 935.863 ; gain = 842.770
+INFO: [VHDL 208-304] Generating VHDL RTL for mlp_HLS.
+INFO: [VLOG 209-307] Generating Verilog RTL for mlp_HLS.
+INFO: [HLS 200-112] Total elapsed time: 76.477 seconds; peak allocated memory: 107.087 MB.

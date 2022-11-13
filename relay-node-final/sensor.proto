@@ -1,0 +1,16 @@
+syntax = "proto2";
+message Sensor{
+    required int32 playerID = 1;
+    required int32 beetleID = 2;
+    message IMUdata {
+        required float a1 = 1;
+        required float a2 = 2;
+        required float a3 = 3;
+        required float g1 = 4;
+        required float g2 = 5;
+        required float g3 = 6;
+
+    }
+    repeated IMUdata payload = 3;
+
+}

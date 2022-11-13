@@ -1,0 +1,13 @@
+mlp_HLS_fadd_32nshbi
+mlp_HLS_fmul_32nsibs
+mlp_HLS_fcmp_32nsjbC
+mlp_HLS_mux_42_32kbM
+mlp_HLS_layer1Bias
+mlp_HLS_layer1Weibkb
+mlp_HLS_layer2Bias
+mlp_HLS_layer2Weicud
+mlp_HLS_outputWeidEe
+mlp_HLS_training_eOg
+mlp_HLS_hidden1LafYi
+regslice_core
+mlp_HLS

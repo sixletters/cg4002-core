@@ -1,0 +1,233 @@
+<profile>
+
+<RTLDesignHierarchy>
+<TopModule>
+<ModuleName>mlp_HLS</ModuleName>
+</TopModule>
+</RTLDesignHierarchy>
+
+<ModuleInformation>
+<Module>
+<Name>mlp_HLS</Name>
+<PerformanceEstimates>
+<SummaryOfTimingAnalysis>
+<TargetClockPeriod>10.00</TargetClockPeriod>
+<ClockUncertainty>1.25</ClockUncertainty>
+<EstimatedClockPeriod>9.770</EstimatedClockPeriod>
+</SummaryOfTimingAnalysis>
+<SummaryOfOverallLatency>
+<Best-caseLatency>124740</Best-caseLatency>
+<Average-caseLatency>124740</Average-caseLatency>
+<Worst-caseLatency>124740</Worst-caseLatency>
+<Best-caseRealTimeLatency>1.247 ms</Best-caseRealTimeLatency>
+<Average-caseRealTimeLatency>1.247 ms</Average-caseRealTimeLatency>
+<Worst-caseRealTimeLatency>1.247 ms</Worst-caseRealTimeLatency>
+<PipelineInitiationInterval>124741</PipelineInitiationInterval>
+<PipelineType>none</PipelineType>
+</SummaryOfOverallLatency>
+<SummaryOfLoopLatency>
+<memset_output>
+<Name>memset_output</Name>
+<TripCount>4</TripCount>
+<Latency>3</Latency>
+<IterationLatency>1</IterationLatency>
+<PipelineDepth>1</PipelineDepth>
+</memset_output>
+<Loop2>
+<Name>Loop 2</Name>
+<TripCount>54</TripCount>
+<Latency>54</Latency>
+<IterationLatency>1</IterationLatency>
+<PipelineDepth>1</PipelineDepth>
+</Loop2>
+<Loop3>
+<Name>Loop 3</Name>
+<TripCount>112</TripCount>
+<Latency>39760</Latency>
+<IterationLatency>355</IterationLatency>
+<PipelineDepth>355</PipelineDepth>
+<Loop3.1>
+<Name>Loop 3.1</Name>
+<TripCount>27</TripCount>
+<Latency>351</Latency>
+<IterationLatency>13</IterationLatency>
+<PipelineDepth>13</PipelineDepth>
+</Loop3.1>
+</Loop3>
+<Loop4>
+<Name>Loop 4</Name>
+<TripCount>112</TripCount>
+<Latency>81984</Latency>
+<IterationLatency>732</IterationLatency>
+<PipelineDepth>732</PipelineDepth>
+<Loop4.1>
+<Name>Loop 4.1</Name>
+<TripCount>56</TripCount>
+<Latency>728</Latency>
+<IterationLatency>13</IterationLatency>
+<PipelineDepth>13</PipelineDepth>
+</Loop4.1>
+</Loop4>
+<Loop5>
+<Name>Loop 5</Name>
+<TripCount>4</TripCount>
+<Latency>2920</Latency>
+<IterationLatency>730</IterationLatency>
+<PipelineDepth>730</PipelineDepth>
+<Loop5.1>
+<Name>Loop 5.1</Name>
+<TripCount>56</TripCount>
+<Latency>728</Latency>
+<IterationLatency>13</IterationLatency>
+<PipelineDepth>13</PipelineDepth>
+</Loop5.1>
+</Loop5>
+<Loop6>
+<Name>Loop 6</Name>
+<TripCount>4</TripCount>
+<Latency>4</Latency>
+<IterationLatency>1</IterationLatency>
+<PipelineDepth>1</PipelineDepth>
+</Loop6>
+<Loop7>
+<Name>Loop 7</Name>
+<TripCount>4</TripCount>
+<Latency>8</Latency>
+<IterationLatency>2</IterationLatency>
+<PipelineDepth>2</PipelineDepth>
+</Loop7>
+</SummaryOfLoopLatency>
+</PerformanceEstimates>
+<AreaEstimates>
+<Resources>
+<BRAM_18K>43</BRAM_18K>
+<DSP48E>5</DSP48E>
+<FF>1487</FF>
+<LUT>1978</LUT>
+<URAM>0</URAM>
+</Resources>
+</AreaEstimates>
+<InterfaceSummary>
+<RtlPorts>
+<name>ap_clk</name>
+<Object>mlp_HLS</Object>
+<Type>return value</Type>
+<Scope></Scope>
+<IOProtocol>ap_ctrl_none</IOProtocol>
+<IOConfig></IOConfig>
+<Dir>in</Dir>
+<Bits>1</Bits>
+<Attribute>control</Attribute>
+</RtlPorts>
+<RtlPorts>
+<name>ap_rst_n</name>
+<Object>mlp_HLS</Object>
+<Type>return value</Type>
+<Scope></Scope>
+<IOProtocol>ap_ctrl_none</IOProtocol>
+<IOConfig></IOConfig>
+<Dir>in</Dir>
+<Bits>1</Bits>
+<Attribute>control</Attribute>
+</RtlPorts>
+<RtlPorts>
+<name>S_AXIS_TDATA</name>
+<Object>S_AXIS_V_data</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>in</Dir>
+<Bits>32</Bits>
+<Attribute>data</Attribute>
+<CType>int</CType>
+</RtlPorts>
+<RtlPorts>
+<name>S_AXIS_TVALID</name>
+<Object>S_AXIS_V_last</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>in</Dir>
+<Bits>1</Bits>
+<Attribute>control</Attribute>
+<CType>bool</CType>
+</RtlPorts>
+<RtlPorts>
+<name>S_AXIS_TREADY</name>
+<Object>S_AXIS_V_last</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>out</Dir>
+<Bits>1</Bits>
+<Attribute>control</Attribute>
+<CType>bool</CType>
+</RtlPorts>
+<RtlPorts>
+<name>S_AXIS_TLAST</name>
+<Object>S_AXIS_V_last</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>in</Dir>
+<Bits>1</Bits>
+<Attribute>data</Attribute>
+<CType>bool</CType>
+</RtlPorts>
+<RtlPorts>
+<name>M_AXIS_TDATA</name>
+<Object>M_AXIS_V_data</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>out</Dir>
+<Bits>32</Bits>
+<Attribute>data</Attribute>
+<CType>int</CType>
+</RtlPorts>
+<RtlPorts>
+<name>M_AXIS_TVALID</name>
+<Object>M_AXIS_V_last</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>out</Dir>
+<Bits>1</Bits>
+<Attribute>control</Attribute>
+<CType>bool</CType>
+</RtlPorts>
+<RtlPorts>
+<name>M_AXIS_TREADY</name>
+<Object>M_AXIS_V_last</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>in</Dir>
+<Bits>1</Bits>
+<Attribute>control</Attribute>
+<CType>bool</CType>
+</RtlPorts>
+<RtlPorts>
+<name>M_AXIS_TLAST</name>
+<Object>M_AXIS_V_last</Object>
+<Type>pointer</Type>
+<Scope></Scope>
+<IOProtocol>axis</IOProtocol>
+<IOConfig>register, both mode</IOConfig>
+<Dir>out</Dir>
+<Bits>1</Bits>
+<Attribute>data</Attribute>
+<CType>bool</CType>
+</RtlPorts>
+</InterfaceSummary>
+</Module>
+</ModuleInformation>
+
+</profile>

@@ -1,0 +1,55 @@
+<profile>
+
+<section name = "Vivado HLS Report for 'mlp_HLS'" level="0">
+<item name = "Date">Sun Nov 13 14:23:04 2022
+</item>
+<item name = "Version">2020.1 (Build 2897737 on Wed May 27 20:21:37 MDT 2020)</item>
+<item name = "Project">mlp_HLS</item>
+<item name = "Solution">solution1</item>
+<item name = "Product family">zynquplus</item>
+<item name = "Target device">xczu3eg-sbva484-1-i</item>
+</section>
+
+<section name = "Performance Estimates" level="0">
+<item name = "Timing">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="4">Clock, Target, Estimated, Uncertainty</keys>
+<column name="ap_clk">10.00 ns, 9.770 ns, 1.25 ns</column>
+</table>
+</item>
+</section>
+</item>
+<item name = "Latency">
+<section name = "" level="1">
+<item name = "Summary"><table name="" hasTotal="0">
+<keys size="8">, min, max, min, max, min, max, Type</keys>
+<column name="">124740, 124740, 1.247 ms, 1.247 ms, 124740, 124740, none</column>
+</table>
+</item>
+<item name = "Detail">
+<section name = "" level="1">
+<item name = "Instance"><table name="" hasTotal="0">
+<keys size="9">Instance, Module, min, max, min, max, min, max, Type</keys>
+</table>
+</item>
+<item name = "Loop"><table name="" hasTotal="0">
+<keys size="8">Loop Name, min, max, Latency, achieved, target, Count, Pipelined</keys>
+<column name="- memset_output">3, 3, 1, -, -, 4, no</column>
+<column name="- Loop 2">54, 54, 1, -, -, 54, no</column>
+<column name="- Loop 3">39760, 39760, 355, -, -, 112, no</column>
+<column name=" + Loop 3.1">351, 351, 13, -, -, 27, no</column>
+<column name="- Loop 4">81984, 81984, 732, -, -, 112, no</column>
+<column name=" + Loop 4.1">728, 728, 13, -, -, 56, no</column>
+<column name="- Loop 5">2920, 2920, 730, -, -, 4, no</column>
+<column name=" + Loop 5.1">728, 728, 13, -, -, 56, no</column>
+<column name="- Loop 6">4, 4, 1, -, -, 4, no</column>
+<column name="- Loop 7">8, 8, 2, -, -, 4, no</column>
+</table>
+</item>
+</section>
+</item>
+</section>
+</item>
+</section>
+</profile>
